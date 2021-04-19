@@ -1,0 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
+.global-slider .carousel-item {
+  display: inline-block;
+}
