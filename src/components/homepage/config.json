@@ -1,0 +1,86 @@
+{
+  "slideshow": {
+    "sliderConfig": {
+      "dots": true,
+      "infinite": true,
+      "speed": 2000,
+      "slidesToShow": 1,
+      "slidesToScroll": 1,
+      "autoplay": true,
+      "draggable": true,
+      "fade": true
+    },
+    "slides": [
+      {
+        "slideImg": "https://picsum.photos/id/237/800/400",
+        "slideImgAlt": "Slide 1",
+        "slideHeading": "Lorem IpSum 1",
+        "slideDetail": "Lorem IpSum Lorem Ipsum",
+        "slideUrl": "#",
+        "slideText": "Lorem Ipsum"
+      },
+      {
+        "slideImg": "https://picsum.photos/seed/picsum/800/400",
+        "slideImgAlt": "Slide 2",
+        "slideHeading": "Lorem IpSum 2",
+        "slideDetail": "Lorem IpSum Lorem Ipsum",
+        "slideUrl": "#",
+        "slideText": "Lorem Ipsum"
+      },
+      {
+        "slideImg": "https://picsum.photos/id/237/800/400?grayscale",
+        "slideImgAlt": "Slide 3",
+        "slideHeading": "Lorem IpSum 3",
+        "slideDetail": "Lorem IpSum Lorem Ipsum",
+        "slideUrl": "#",
+        "slideText": "Lorem Ipsum"
+      }
+    ]
+  },
+  "categories": {
+    "subHeading": "Top Categories",
+    "heading": "Pick the right category Build your career",
+    "category": [
+      {
+        "categoryImage": "https://picsum.photos/64",
+        "categoryName": "IT & Software",
+        "categoryUrl": "#"
+      },
+      {
+        "categoryImage": "https://picsum.photos/64",
+        "categoryName": "IT & Software",
+        "categoryUrl": "#"
+      },
+      {
+        "categoryImage": "https://picsum.photos/64",
+        "categoryName": "IT & Software",
+        "categoryUrl": "#"
+      },
+      {
+        "categoryImage": "https://picsum.photos/64",
+        "categoryName": "IT & Software",
+        "categoryUrl": "#"
+      },
+      {
+        "categoryImage": "https://picsum.photos/64",
+        "categoryName": "IT & Software",
+        "categoryUrl": "#"
+      },
+      {
+        "categoryImage": "https://picsum.photos/64",
+        "categoryName": "IT & Software",
+        "categoryUrl": "#"
+      },
+      {
+        "categoryImage": "https://picsum.photos/64",
+        "categoryName": "IT & Software",
+        "categoryUrl": "#"
+      },
+      {
+        "categoryImage": "https://picsum.photos/64",
+        "categoryName": "IT & Software",
+        "categoryUrl": "#"
+      }
+    ]
+  }
+}

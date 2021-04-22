@@ -8,6 +8,8 @@ const SlideWithCaption = ({
   imageHeight,
   slideHeading,
   slideDetail,
+  slideUrl,
+  slideText,
 }) => {
   return (
     <Carousel.Item>
@@ -22,6 +24,9 @@ const SlideWithCaption = ({
       <Carousel.Caption>
         <h3>{slideHeading}</h3>
         <p>{slideDetail}</p>
+        <a className="btn btn-primary" href={slideUrl}>
+          {slideText}
+        </a>
       </Carousel.Caption>
     </Carousel.Item>
   );

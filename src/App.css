@@ -1,7 +1,51 @@
-body {
-  overflow-x: hidden;
+.global-slider {
+  overflow: hidden;
 }
 
 .global-slider .carousel-item {
   display: inline-block;
+}
+
+.global-slider .slick-dots {
+  bottom: 10px;
+}
+
+.category-on-hover-animation {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  display: block;
+  padding: 20px;
+  color: #000;
+}
+
+.category-on-hover-animation:hover {
+  transform: translateY(-10px);
+  text-decoration: none;
+  color: #000;
+}
+
+.sec-heading {
+  margin-bottom: 80px;
+}
+
+/* Mobile css */
+@media (max-width: 767px) {
+  .category-on-hover-animation {
+    text-align: center;
+    font-size: 15px;
+    padding: 15px;
+  }
+  .category-on-hover-animation img {
+    display: block;
+    margin: 5px auto;
+  }
+}
+
+@keyframes slideOutUp {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-70px);
+  }
 }

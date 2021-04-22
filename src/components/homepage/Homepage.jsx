@@ -1,39 +1,30 @@
 import React from "react";
-import Slideshow from "../higher-order-component/Slideshow";
-import SlideWithCaption from "../higher-order-component/SlideWithCaption";
+import Categories from "./Categories";
+import HomepageData from "./config.json";
+import HomepageSlider from "./HomepageSlider";
 
 const HomePage = () => {
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 2000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    // autoplay: true,
-  };
+  let keys = Object.keys(HomepageData);
 
   return (
     <div>
-      <Slideshow settings={settings}>
-        <SlideWithCaption
-          slideImg="https://picsum.photos/id/237/800/400"
-          slideImgAlt="Slide 1"
-          slideHeading="Lorem IpSum 1"
-          slideDetail="Lorem Ipsum Lorem Ipsum"
-        />
-        <SlideWithCaption
-          slideImg="https://picsum.photos/seed/picsum/800/400"
-          slideImgAlt="Slide 1"
-          slideHeading="Lorem IpSum 2"
-          slideDetail="Lorem Ipsum Lorem Ipsum"
-        />
-        <SlideWithCaption
-          slideImg="https://picsum.photos/id/237/800/400?grayscale"
-          slideImgAlt="Slide 2"
-          slideHeading="Lorem IpSum 3"
-          slideDetail="Lorem Ipsum Lorem Ipsum"
-        />
-      </Slideshow>
+      {keys.map((item, index) => {
+        switch (item) {
+          case "slideshow":
+            return (
+              <HomepageSlider
+                data={HomepageData[item]}
+                key={`${item}--${index}`}
+              />
+            );
+          case "categories":
+            return (
+              <Categories key={`${item}--${index}`} data={HomepageData[item]} />
+            );
+          default:
+            return <hr key={`${item}--${index}`} />;
+        }
+      })}
     </div>
   );
 };
