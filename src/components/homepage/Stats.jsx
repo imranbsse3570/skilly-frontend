@@ -6,11 +6,13 @@ const Stats = ({ data }) => {
   if (data.settings && data.settings.length > 0) {
     stats = data.settings.map((item, key) => {
       return (
-        <div className="col-md-3 col-sm-3 text-center stats-item p-3">
+        <div
+          key={`${item}--${key}`}
+          className="col-md-3 col-sm-3 text-center stats-item p-3"
+        >
           <h2>
             <CountUp end={item.number} duration={5} />
           </h2>
-
           <h6>{item.text}</h6>
         </div>
       );

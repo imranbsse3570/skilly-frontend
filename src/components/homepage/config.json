@@ -37,6 +37,95 @@
       }
     ]
   },
+  "featured-category": {
+    "title": "Popular Courses",
+    "sliderConfig": {
+      "infinite": true,
+      "speed": 2000,
+      "slidesToShow": 3,
+      "slidesToScroll": 1,
+      "autoplay": true,
+      "dots": false,
+      "responsive": [
+        {
+          "breakpoint": 1024,
+          "settings": {
+            "slidesToShow": 2,
+            "slidesToScroll": 1
+          }
+        },
+        {
+          "breakpoint": 600,
+          "settings": {
+            "slidesToShow": 1,
+            "slidesToScroll": 1
+          }
+        }
+      ]
+    },
+    "courses": [
+      {
+        "name": "Object Oriented Programming",
+        "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...",
+        "price": 20,
+        "compareAtPrice": 40,
+        "numOfReviews": 30,
+        "reviewsAverage": 4,
+        "imageUrl": "https://picsum.photos/id/237/400/300?grayscale",
+        "productUrl": "#"
+      },
+      {
+        "name": "Object Oriented Programming",
+        "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...",
+        "price": 20,
+        "compareAtPrice": 0,
+        "numOfReviews": 30,
+        "reviewsAverage": 4,
+        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "productUrl": "#"
+      },
+      {
+        "name": "Object Oriented Programming",
+        "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...",
+        "price": 20,
+        "compareAtPrice": 40,
+        "numOfReviews": 30,
+        "reviewsAverage": 4,
+        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "productUrl": "#"
+      },
+      {
+        "name": "Object Oriented Programming",
+        "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...",
+        "price": 20,
+        "compareAtPrice": 40,
+        "numOfReviews": 30,
+        "reviewsAverage": 4,
+        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "productUrl": "#"
+      },
+      {
+        "name": "Object Oriented Programming",
+        "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...",
+        "price": 20,
+        "compareAtPrice": 40,
+        "numOfReviews": 30,
+        "reviewsAverage": 4,
+        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "productUrl": "#"
+      },
+      {
+        "name": "Object Oriented Programming",
+        "description": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum ...",
+        "price": 20,
+        "compareAtPrice": 40,
+        "numOfReviews": 30,
+        "reviewsAverage": 4,
+        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "productUrl": "#"
+      }
+    ]
+  },
   "categories": {
     "subHeading": "Top Categories",
     "heading": "Pick the right category Build your career",
@@ -83,7 +172,7 @@
       }
     ]
   },
-  "featured-category": {
+  "featured-category--1": {
     "title": "Popular Courses",
     "sliderConfig": {
       "infinite": true,

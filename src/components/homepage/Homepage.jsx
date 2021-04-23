@@ -11,7 +11,7 @@ const HomePage = () => {
   return (
     <div>
       {keys.map((item, index) => {
-        switch (item) {
+        switch (item.split("--")[0]) {
           case "slideshow":
             return (
               <HomepageSlider
