@@ -20,7 +20,7 @@ const HomepageSlider = ({ data }) => {
     });
   }
   return slides ? (
-    <Slideshow settings={data.sliderConfig}> {slides}</Slideshow>
+    <Slideshow settings={{ ...data.sliderConfig }}> {slides}</Slideshow>
   ) : (
     <div>No Content</div>
   );
