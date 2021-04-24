@@ -280,5 +280,58 @@
         "text": "Categories"
       }
     ]
+  },
+  "testimonials": {
+    "sliderConfig": {
+      "infinite": true,
+      "autoplay": true,
+      "speed": 2000,
+      "slidesToShow": 3,
+      "slidesToScroll": 1,
+      "dots": false,
+      "responsive": [
+        {
+          "breakpoint": 1024,
+          "settings": {
+            "slidesToShow": 2,
+            "slidesToScroll": 1
+          }
+        },
+        {
+          "breakpoint": 600,
+          "settings": {
+            "slidesToShow": 1,
+            "slidesToScroll": 1
+          }
+        }
+      ]
+    },
+    "subTitle": "TESTIMONIALS",
+    "title": "What Our Yours Say About US",
+    "bgImage": "https://picsum.photos/id/231/1600/900",
+    "reviewIconOpening": "fas fa-quote-left",
+    "reviewIconClosing": "fas fa-quote-right",
+    "testimonial": [
+      {
+        "detail": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+        "name": "Imran",
+        "reviewTitle": "Lorem Ipsum"
+      },
+      {
+        "detail": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+        "name": "Noman",
+        "reviewTitle": "Lorem Ipsum"
+      },
+      {
+        "detail": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+        "name": "Bilal",
+        "reviewTitle": "Lorem Ipsum"
+      },
+      {
+        "detail": "Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum",
+        "name": "Usama",
+        "reviewTitle": "Lorem Ipsum"
+      }
+    ]
   }
 }

@@ -20,7 +20,7 @@ const Stats = ({ data }) => {
   }
   return (
     <div className="stats-bg">
-      <div className="container p-5 ">
+      <div className="container p-md-5 ">
         <div className="row">{stats ? stats : ""}</div>
       </div>
     </div>

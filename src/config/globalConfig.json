@@ -1,0 +1,123 @@
+{
+  "header": {},
+  "footer": {
+    "settings": [
+      {
+        "title": "Column 1",
+        "links": [
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          }
+        ]
+      },
+      {
+        "title": "Column 2",
+        "links": [
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          }
+        ]
+      },
+      {
+        "title": "Column 3",
+        "links": [
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          }
+        ]
+      },
+      {
+        "title": "Column 4",
+        "links": [
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          },
+          {
+            "linkName": "Lorem",
+            "linkUrl": "#"
+          }
+        ]
+      }
+    ]
+  }
+}

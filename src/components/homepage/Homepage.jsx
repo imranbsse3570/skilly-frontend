@@ -4,6 +4,7 @@ import HomepageData from "./config.json";
 import FeaturedCategory from "./FeaturedCategory";
 import HomepageSlider from "./HomepageSlider";
 import Stats from "./Stats";
+import Testimonials from "./Testimonials";
 
 const HomePage = () => {
   let keys = Object.keys(HomepageData);
@@ -33,6 +34,13 @@ const HomePage = () => {
           case "stats":
             return (
               <Stats key={`${item}--${index}`} data={HomepageData[item]} />
+            );
+          case "testimonials":
+            return (
+              <Testimonials
+                key={`${item}--${index}`}
+                data={HomepageData[item]}
+              />
             );
           default:
             return <hr key={`${item}--${index}`} />;

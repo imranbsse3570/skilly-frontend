@@ -2,6 +2,10 @@
   overflow: hidden;
 }
 
+.slick-slide {
+  transition: all 0.5s ease-in-out;
+}
+
 .global-slider .carousel-item {
   display: inline-block;
 }
@@ -25,7 +29,7 @@
 }
 
 .sec-heading {
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 }
 
 .product-grid {
@@ -162,6 +166,50 @@
 }
 .stats-item:last-of-type {
   border-right: none;
+}
+.testimonials-homepage .testimonial {
+  background-color: #fff;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 7%);
+}
+.testimonials-homepage .testimonial .review-icon-closing {
+  text-align: right;
+  margin-bottom: 0px;
+}
+
+.testimonials-homepage .testimonial .reviewTitle {
+  margin-bottom: 1rem;
+}
+
+.site-footer {
+  background-color: #ededed;
+}
+
+.site-footer .accordion .btn {
+  box-shadow: none;
+  width: 100%;
+  text-align: left;
+  transition: all 2s linear;
+}
+
+.site-footer .accordion .btn .inner-accordion-icon {
+  float: right;
+  padding: 3px 0;
+}
+
+.site-footer .accordion .btn .inner-accoordion-title {
+  margin: 10px;
+}
+
+.site-footer .accordion .btn .inner-accoordion-title .inner-accordion-icon {
+  transition: all 0.3s linear;
+}
+
+.site-footer
+  .accordion
+  .btn.is-drop-open
+  .inner-accoordion-title
+  .inner-accordion-icon {
+  transform: rotate(45deg);
 }
 
 /* Mobile css */
