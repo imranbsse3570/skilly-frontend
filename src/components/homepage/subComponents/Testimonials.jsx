@@ -1,5 +1,5 @@
 import React from "react";
-import Slideshow from "../higher-order-component/Slideshow";
+import Slideshow from "../../higher-order-component/Slideshow";
 import Testimonial from "./Testimonial";
 
 const Testimonials = ({ data }) => {

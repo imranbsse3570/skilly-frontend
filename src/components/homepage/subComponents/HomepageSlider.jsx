@@ -1,6 +1,6 @@
 import React from "react";
-import Slideshow from "../higher-order-component/Slideshow";
-import SlideWithCaption from "../higher-order-component/SlideWithCaption";
+import Slideshow from "../../higher-order-component/Slideshow";
+import SlideWithCaption from "../../higher-order-component/SlideWithCaption";
 
 const HomepageSlider = ({ data }) => {
   let slides = undefined;

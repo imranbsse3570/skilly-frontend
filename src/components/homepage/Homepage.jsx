@@ -1,10 +1,10 @@
 import React from "react";
-import Categories from "./Categories";
+import Categories from "./subComponents/Categories";
 import HomepageData from "./config.json";
-import FeaturedCategory from "./FeaturedCategory";
-import HomepageSlider from "./HomepageSlider";
-import Stats from "./Stats";
-import Testimonials from "./Testimonials";
+import FeaturedCategory from "./subComponents/FeaturedCategory";
+import HomepageSlider from "./subComponents/HomepageSlider";
+import Stats from "./subComponents/Stats";
+import Testimonials from "./subComponents/Testimonials";
 
 const HomePage = () => {
   let keys = Object.keys(HomepageData);

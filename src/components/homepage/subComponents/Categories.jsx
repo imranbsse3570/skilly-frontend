@@ -20,7 +20,7 @@ const Categories = ({ data }) => {
   }
 
   return (
-    <div style={{ backgroundColor: "#ededed" }}>
+    <div style={{ backgroundColor: "#f3f3f3" }}>
       <div className="container pt-5 pb-5">
         {subHeading || heading ? (
           <div className="row">

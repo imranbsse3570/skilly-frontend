@@ -1,6 +1,6 @@
 import React from "react";
-import ProductGrid from "../higher-order-component/ProductGrid";
-import Slideshow from "../higher-order-component/Slideshow";
+import ProductGrid from "../../higher-order-component/ProductGrid";
+import Slideshow from "../../higher-order-component/Slideshow";
 
 const FeaturedCategory = ({ data }) => {
   let slides = undefined;
