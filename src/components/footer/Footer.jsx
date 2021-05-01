@@ -16,7 +16,7 @@ function ContextAwareToggle({ children, eventKey, callback }) {
   return (
     <button
       type="button"
-      class={`btn ${isCurrentEventKey ? "is-drop-open" : ""}`}
+      className={`btn ${isCurrentEventKey ? "is-drop-open" : ""}`}
       onClick={decoratedOnClick}
       style={{ color: "#0c2e60" }}
     >
@@ -29,12 +29,15 @@ const Footer = ({ data }) => {
   let rows =
     data.settings.map((item, index) => {
       return (
-        <div className="col-md-3 col-sm-6 stats-item">
+        <div
+          key={`${item.id}--${index}`}
+          className="col-md-3 col-sm-6 stats-item"
+        >
           <Accordion defaultActiveKey="0">
             <ContextAwareToggle eventKey="0">
               <h4 className="inner-accoordion-title">
                 {item.title}
-                <i class="d-sm-block d-md-none inner-accordion-icon fas fa-plus"></i>
+                <i className="d-sm-block d-md-none inner-accordion-icon fas fa-plus"></i>
               </h4>
             </ContextAwareToggle>
             <Accordion.Collapse eventKey="0">
@@ -43,6 +46,7 @@ const Footer = ({ data }) => {
                   {item.links.map((link, key) => {
                     return (
                       <li
+                        key={`${link}--${key}`}
                         className="list-group-item bg-transparent py-1"
                         style={{ borderBottom: "none" }}
                       >
@@ -65,14 +69,18 @@ const Footer = ({ data }) => {
     }) || "";
 
   return (
-    <footer class="site-footer">
+    <footer className="site-footer">
       <div className="container py-5">
         <div className="row">{rows}</div>
       </div>
-      <div class="foo-btm">
-        <div class="container">
-          <p class="copyright">
-            Copyright © 2021 <a href="">skilly.com</a>. All rights reserved.
+      <div className="foo-btm">
+        <div className="container">
+          <p className="copyright">
+            Copyright © 2021{" "}
+            <NavLink to={`/`} as="a">
+              skilly.com
+            </NavLink>
+            . All rights reserved.
           </p>
         </div>
       </div>

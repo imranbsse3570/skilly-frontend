@@ -1,5 +1,5 @@
 import React from "react";
-import { Player, BigPlayButton } from "video-react";
+// import { Player, BigPlayButton } from "video-react";
 import InstructorWidget from "./InstructorWidget/InstructorWidget";
 import ProductForm from "./ProductForm/ProductForm";
 import CourseContent from "./subComponents/CourseContent";

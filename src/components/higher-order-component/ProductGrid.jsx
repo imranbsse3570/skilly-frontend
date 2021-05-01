@@ -1,6 +1,6 @@
 import React from "react";
 import currencyFormatter from "currency-formatter";
-import { NavLink as Link, Outlet } from "react-router-dom";
+import { NavLink as Link } from "react-router-dom";
 
 const ProductGrid = ({ course }) => {
   let discount = undefined;
@@ -43,7 +43,7 @@ const ProductGrid = ({ course }) => {
           )}
         </div>
       </div>
-      <div class="social-wrapper">
+      <div className="social-wrapper">
         <ul className="social">
           <li>
             <Link to={`/courses/${course.category}/${course.slug}`} as="a">
@@ -51,19 +51,19 @@ const ProductGrid = ({ course }) => {
             </Link>
           </li>
           <li>
-            <a href="" data-tip="Wishlist">
+            <Link to={`/courses`} as="a">
               <i className="fa fa-heart"></i>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="" data-tip="add to cart">
+            <Link to={`/courses`} as="a">
               <i className="fa fa-shopping-cart"></i>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="" data-tip="Compare">
+            <Link to={`/courses`} as="a">
               <i className="fa fa-random"></i>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

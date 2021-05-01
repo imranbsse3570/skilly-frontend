@@ -29,7 +29,9 @@ const Testimonial = ({
     >
       <p className="review-icon-opening">
         <i
-          class={reviewIconOpening ? reviewIconOpening : "fas fa-quote-left"}
+          className={
+            reviewIconOpening ? reviewIconOpening : "fas fa-quote-left"
+          }
         />
       </p>
       <div className="text-center">
@@ -39,7 +41,9 @@ const Testimonial = ({
       </div>
       <p className="review-icon-closing">
         <i
-          class={reviewIconClosing ? reviewIconClosing : "fas fa-quote-right"}
+          className={
+            reviewIconClosing ? reviewIconClosing : "fas fa-quote-right"
+          }
         />
       </p>
     </div>
