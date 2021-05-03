@@ -8,6 +8,7 @@ import Courses from "../components/courses/Courses";
 import CourseDetails from "../components/courseDetails/CourseDetails";
 import Login from "../components/Login/Login";
 import SignUp from "../components/signup/SignUp";
+import LecturePortal from "../components/LecturePortal/LecturePortal";
 
 const RouterConfig = ({ data }) => {
   return (
@@ -19,7 +20,15 @@ const RouterConfig = ({ data }) => {
         <Route path="/courses">
           <Route path="/:categoryId">
             <Route path="/" element={<Courses />} />
-            <Route path="/:courseId" element={<CourseDetails />} />
+            <Route path="/:courseId">
+              <Route path="/" element={<CourseDetails />} />
+            </Route>
+          </Route>
+        </Route>
+
+        <Route path="/:courseId">
+          <Route path="/lectures">
+            <Route path="/:lectureId" element={<LecturePortal />} />
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />

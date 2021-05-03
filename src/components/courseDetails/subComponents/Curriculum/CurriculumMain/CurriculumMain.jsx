@@ -1,5 +1,5 @@
 import React from "react";
-import CurriculumSub from "./CurriculumSub/CurriculumSub";
+import CurriculumSub from "../../../../higher-order-component/CurriculumSub";
 
 const CurriculumMain = () => {
   return (

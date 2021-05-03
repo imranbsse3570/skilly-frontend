@@ -1,12 +1,13 @@
 import React from "react";
+import { NavLink as Link } from "react-router-dom";
 
 const CoursePreview = () => {
   return (
     <div class="course-preview box-shadow">
       <img src="https://picsum.photos/id/237/800/600?grayscale" alt="" />
-      <a href="#" class="preview-btn">
+      <Link to={"/coursesId/lectures/lectureId"} as="a" className="preview-btn">
         <i class="fas fa-play"></i>
-      </a>
+      </Link>
     </div>
   );
 };

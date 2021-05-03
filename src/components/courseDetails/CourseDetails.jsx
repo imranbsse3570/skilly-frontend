@@ -1,5 +1,4 @@
 import React from "react";
-// import { Player, BigPlayButton } from "video-react";
 import InstructorWidget from "./InstructorWidget/InstructorWidget";
 import ProductForm from "./ProductForm/ProductForm";
 import CourseContent from "./subComponents/CourseContent";
@@ -22,9 +21,6 @@ const CourseDetails = () => {
           <CategoriesSidebar />
         </div>
       </div>
-      {/* <Player src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4">
-        <BigPlayButton position="center" />
-      </Player> */}
     </div>
   );
 };
