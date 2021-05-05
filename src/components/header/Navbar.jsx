@@ -41,6 +41,11 @@ const Header = () => {
               Register
             </NavLink>
           </Nav.Link>
+          <Nav.Link>
+            <NavLink to="/pages/contact-us" as="a">
+              Contact
+            </NavLink>
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

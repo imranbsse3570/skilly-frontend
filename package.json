@@ -10,6 +10,7 @@
     "babel-plugin-prismjs": "^2.0.1",
     "bootstrap": "^4.6.0",
     "currency-formatter": "^1.5.7",
+    "formik": "^2.2.6",
     "history": "^5.0.0",
     "prismjs": "^1.23.0",
     "react": "^17.0.2",
@@ -23,7 +24,9 @@
     "slick-carousel": "^1.8.1",
     "validator": "^13.6.0",
     "video-react": "^0.14.1",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "yup": "^0.32.9",
+    "yup-phone": "^1.2.19"
   },
   "scripts": {
     "start": "react-scripts start",

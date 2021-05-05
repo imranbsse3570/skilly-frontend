@@ -9,6 +9,7 @@ import CourseDetails from "../components/courseDetails/CourseDetails";
 import Login from "../components/Login/Login";
 import SignUp from "../components/signup/SignUp";
 import LecturePortal from "../components/LecturePortal/LecturePortal";
+import ContactUs from "../components/ContactUs/ContactUs";
 
 const RouterConfig = ({ data }) => {
   return (
@@ -33,6 +34,9 @@ const RouterConfig = ({ data }) => {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<SignUp />} />
+        <Route path="/pages">
+          <Route path="/contact-us" element={<ContactUs />} />
+        </Route>
         <Route path="*" element={<h2>Not Found</h2>} />
       </Routes>
 
