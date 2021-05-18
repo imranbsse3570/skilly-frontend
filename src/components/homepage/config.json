@@ -12,7 +12,7 @@
     },
     "slides": [
       {
-        "slideImg": "https://picsum.photos/id/237/800/400",
+        "slideImg": "https://picsum.photos/800/400",
         "slideImgAlt": "Slide 1",
         "slideHeading": "Lorem IpSum 1",
         "slideDetail": "Lorem IpSum Lorem Ipsum",
@@ -20,7 +20,7 @@
         "slideText": "Lorem Ipsum"
       },
       {
-        "slideImg": "https://picsum.photos/seed/picsum/800/400",
+        "slideImg": "https://picsum.photos/800/400",
         "slideImgAlt": "Slide 2",
         "slideHeading": "Lorem IpSum 2",
         "slideDetail": "Lorem IpSum Lorem Ipsum",
@@ -28,7 +28,7 @@
         "slideText": "Lorem Ipsum"
       },
       {
-        "slideImg": "https://picsum.photos/id/237/800/400?grayscale",
+        "slideImg": "https://picsum.photos/800/400",
         "slideImgAlt": "Slide 3",
         "slideHeading": "Lorem IpSum 3",
         "slideDetail": "Lorem IpSum Lorem Ipsum",
@@ -71,7 +71,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/id/237/400/300?grayscale",
+        "imageUrl": "https://picsum.photos/400/300?grayscale",
         "productUrl": "#"
       },
       {
@@ -81,7 +81,7 @@
         "compareAtPrice": 0,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       },
       {
@@ -91,7 +91,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       },
       {
@@ -101,7 +101,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       },
       {
@@ -111,7 +111,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       },
       {
@@ -121,7 +121,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       }
     ]
@@ -206,7 +206,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/id/237/400/300?grayscale",
+        "imageUrl": "https://picsum.photos/400/300?grayscale",
         "productUrl": "#"
       },
       {
@@ -216,7 +216,7 @@
         "compareAtPrice": 0,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       },
       {
@@ -226,7 +226,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       },
       {
@@ -236,7 +236,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       },
       {
@@ -246,7 +246,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       },
       {
@@ -256,7 +256,7 @@
         "compareAtPrice": 40,
         "numOfReviews": 30,
         "reviewsAverage": 4,
-        "imageUrl": "https://picsum.photos/seed/picsum/400/300",
+        "imageUrl": "https://picsum.photos/400/300",
         "productUrl": "#"
       }
     ]
@@ -308,7 +308,7 @@
     },
     "subTitle": "TESTIMONIALS",
     "title": "What Our Yours Say About US",
-    "bgImage": "https://picsum.photos/id/231/1600/900",
+    "bgImage": "https://picsum.photos/1600/900",
     "reviewIconOpening": "fas fa-quote-left",
     "reviewIconClosing": "fas fa-quote-right",
     "testimonial": [
