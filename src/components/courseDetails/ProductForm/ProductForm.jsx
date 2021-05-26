@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const ProductForm = () => {
   return (
@@ -16,9 +17,13 @@ const ProductForm = () => {
         <a href="#" className="btn btn-outline my-3 w-100 border">
           Add to cart
         </a>
-        <a href="#" className="btn btn-filled btn-primary w-100 border">
-          Buy now
-        </a>
+        <NavLink
+          className="btn btn-filled btn-primary w-100 border"
+          as="a"
+          to="/courses/undefined/undefined/checkout"
+        >
+          Buy Now
+        </NavLink>
       </div>
     </div>
   );

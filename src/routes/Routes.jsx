@@ -10,6 +10,7 @@ import Login from "../components/Login/Login";
 import SignUp from "../components/signup/SignUp";
 import LecturePortal from "../components/LecturePortal/LecturePortal";
 import ContactUs from "../components/ContactUs/ContactUs";
+import Checkout from "../components/checkout/Checkout";
 
 const RouterConfig = ({ data }) => {
   return (
@@ -22,6 +23,7 @@ const RouterConfig = ({ data }) => {
           <Route path="/:categoryId">
             <Route path="/" element={<Courses />} />
             <Route path="/:courseId">
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="/" element={<CourseDetails />} />
             </Route>
           </Route>
