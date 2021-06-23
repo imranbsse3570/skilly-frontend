@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import "./checkout.css";
 
 const stripePromise = loadStripe(
-  "pk_test_51HUF33IO0Avi3ho0jxxmO1ab8Rmj8SbzCslcC0D98epNZwgij1IBAyylgBfdSycGyZYVeG2fzASzdvDOY1wDV9f300E830DlVv"
+  "pk_test_51IzZgmLLnvDoXWyo3ylp4Cn7f23mPqkniEc7mLnfjJ5THdSvA7QUUKleJQFngbrJUV8hC5003zow7Hlptmy4D59R00C0amFEzd"
 );
 
 const ProductDisplay = ({ handleClick }) => (
@@ -57,11 +58,11 @@ export default function Checkout() {
     var myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWI5ZDgxOThiNjBiMGIzYzhkYWQ2YyIsImlhdCI6MTYyMTg0ODYwOSwiZXhwIjoxNjI5NjI0NjA5fQ.0a3KfFRKtLmHKMYGi-rtqqFSvMIN5EGt7r-7yH06jbs"
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYmRmYTcyN2IyMThjMDAxNTUyYzFmNSIsImlhdCI6MTYyMzA2OTY5MywiZXhwIjoxNjMwODQ1NjkzfQ.yd1Nf9z8mUob1F9IzlN_9-vovpOgnNNyNOyS0_gy5m0"
     );
     myHeaders.append(
       "Cookie",
-      "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOWI5ZDgxOThiNjBiMGIzYzhkYWQ2YyIsImlhdCI6MTYyMTg0ODYwOSwiZXhwIjoxNjI5NjI0NjA5fQ.0a3KfFRKtLmHKMYGi-rtqqFSvMIN5EGt7r-7yH06jbs"
+      "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYmRmYTcyN2IyMThjMDAxNTUyYzFmNSIsImlhdCI6MTYyMzA2OTY5MywiZXhwIjoxNjMwODQ1NjkzfQ.yd1Nf9z8mUob1F9IzlN_9-vovpOgnNNyNOyS0_gy5m0"
     );
 
     var requestOptions = {
@@ -71,11 +72,13 @@ export default function Checkout() {
     };
 
     const response = await fetch(
-      "http://localhost:8000/api/v1/courses/60a7a64295a20433fcd32b9b/checkout",
+      "http://localhost:8000/api/v1/courses/60bdfb367b218c001552c1f7/checkout",
       requestOptions
     );
 
     const session = (await response.json()).session;
+
+    console.log(session);
 
     // When the customer clicks on the button, redirect them to Checkout.
     const result = await stripe.redirectToCheckout({
@@ -89,9 +92,13 @@ export default function Checkout() {
     }
   };
 
-  return message ? (
-    <Message message={message} />
-  ) : (
-    <ProductDisplay handleClick={handleClick} />
+  return (
+    <div className="stripe-checkout">
+      {message ? (
+        <Message message={message} />
+      ) : (
+        <ProductDisplay handleClick={handleClick} />
+      )}
+    </div>
   );
 }

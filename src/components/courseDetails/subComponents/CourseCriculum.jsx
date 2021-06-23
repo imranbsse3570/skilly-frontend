@@ -5,18 +5,25 @@ import OverView from "./OverView/OverView";
 import Curriculum from "./Curriculum/Curriculum";
 import CourseObjective from "./CourseObjective/CourseObjective";
 
-const CourseCriculum = () => {
+const CourseCriculum = ({ course }) => {
   return (
     <div className="courseCricullum box-shadow">
       <Tabs defaultActiveKey="overview" id="uncontrolled-tab-example">
         <Tab eventKey="overview" title="Overview">
-          {<OverView />}
+          {
+            <OverView
+              description={course.description}
+              totalDuration={course.totalDuration}
+              noOfLectures={course.lectures.length}
+              requirements={course.requirements}
+            />
+          }
         </Tab>
         <Tab eventKey="curriculum" title="Curriculum">
-          {<Curriculum />}
+          {<Curriculum lectures={course.lectures} courseId={course._id} />}
         </Tab>
         <Tab eventKey="objective" title="Objective">
-          {<CourseObjective />}
+          {<CourseObjective objectives={course.objectives} />}
         </Tab>
       </Tabs>
     </div>

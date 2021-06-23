@@ -1,35 +1,33 @@
 import React from "react";
+import { NavLink as Link } from "react-router-dom";
 
-const CourseContent = () => {
+const CourseContent = ({
+  title,
+  summary,
+  author,
+  createdAt,
+  noOfReviews,
+  rating,
+}) => {
   return (
     <div className="course-content box-shadow">
-      <h3>HTML5 for beginners</h3>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius, quae
-        soluta. Praesentium consequatur odio recusandae nostrum pariatur unde
-      </p>
+      <h3>{title}</h3>
+      <p>{summary}</p>
       <div className="details">
         <span>
-          By <a href="#">Von wick</a>
+          By&nbsp;
+          <Link to="/" as="a">
+            {author}
+          </Link>
         </span>
-        <span>Last update 10 Sep. 2019</span>
+        <span>Created At {new Date(createdAt).toDateString()}</span>
         <div className="ratings">
-          <a href="#">
-            <i className="fas fa-star"></i>
-          </a>
-          <a href="#">
-            <i className="fas fa-star"></i>
-          </a>
-          <a href="#">
-            <i className="far fa-star"></i>
-          </a>
-          <a href="#">
-            <i className="far fa-star"></i>
-          </a>
-          <a href="#">
-            <i className="far fa-star"></i>
-          </a>
-          <span style={{ paddingLeft: 10 }}>0 views</span>
+          <i className={`${rating >= 1 ? "fas" : "far"} fa-star`}></i>
+          <i className={`${rating >= 2 ? "fas" : "far"} fa-star`}></i>
+          <i className={`${rating >= 3 ? "fas" : "far"} fa-star`}></i>
+          <i className={`${rating >= 4 ? "fas" : "far"} fa-star`}></i>
+          <i className={`${rating >= 5 ? "fas" : "far"} fa-star`}></i>
+          <span style={{ paddingLeft: 10 }}>{noOfReviews} views</span>
         </div>
       </div>
     </div>

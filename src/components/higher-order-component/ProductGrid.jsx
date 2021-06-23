@@ -3,6 +3,8 @@ import currencyFormatter from "currency-formatter";
 import { NavLink as Link } from "react-router-dom";
 
 const ProductGrid = ({ course }) => {
+  console.log(course);
+
   let discount = undefined;
   if (course.compareAtPrice > course.price) {
     discount = (course.price * 100) / course.compareAtPrice;
@@ -14,11 +16,11 @@ const ProductGrid = ({ course }) => {
           <img
             className="pic-1"
             src={
-              course.imageUrl
-                ? course.imageUrl
-                : "https://via.placeholder.com/400"
+              course.previewImage
+                ? `https://skilly-online.herokuapp.com/files/coursePreview/${course.previewImage}`
+                : "https://skilly-online.herokuapp.com/files/coursePreview/default.jpg"
             }
-            alt={course.name}
+            alt={course.title}
           />
         </a>
         {discount ? (
@@ -29,9 +31,11 @@ const ProductGrid = ({ course }) => {
       </div>
       <div className="product-content">
         <h3 className="title">
-          <a href={course.productUrl}>{course.name}</a>
+          <Link to={`./${course.category}/${course.slug}`} as="a">
+            {course.title}
+          </Link>
         </h3>
-        <span className="description">{course.description}</span>
+        <span className="description">{course.summary}</span>
         <div className="price">
           {currencyFormatter.format(course.price, { code: "USD" })}
           {course.compareAtPrice > course.price ? (

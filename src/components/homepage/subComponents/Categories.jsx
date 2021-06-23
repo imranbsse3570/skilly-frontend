@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Category from "./Category";
+import { getCategories } from "../../../services/category";
 
 const Categories = ({ data }) => {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchingData = async () => {
+      try {
+        const result = await getCategories();
+        setCategories(result.data.docs);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchingData();
+  }, []);
+
   let subHeading = undefined;
   if (data.subHeading) {
     subHeading = <h3 className="h4 text-center">{data.subHeading}</h3>;
@@ -10,13 +25,6 @@ const Categories = ({ data }) => {
   let heading = undefined;
   if (data.heading) {
     heading = <h1 className="h2 text-center">{data.heading}</h1>;
-  }
-
-  let categories = undefined;
-  if (data.category && data.category.length > 0) {
-    categories = data.category.map((item, index) => {
-      return <Category key={`${item.categoryName}--${index}`} item={item} />;
-    });
   }
 
   return (
@@ -34,7 +42,15 @@ const Categories = ({ data }) => {
         ) : (
           ""
         )}
-        {categories ? <div className="row">{categories}</div> : ""}
+        {categories.length > 0 ? (
+          <div className="row">
+            {categories.map((item, index) => (
+              <Category key={`${item.slug}--${index}`} item={item} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center">Loading...</p>
+        )}
       </div>
     </div>
   );

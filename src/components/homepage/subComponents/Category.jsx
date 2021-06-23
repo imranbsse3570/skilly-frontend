@@ -11,12 +11,12 @@ const Category = ({ item }) => {
         href={item.categoryUrl}
       >
         <img
-          src={item.categoryImage}
+          src={`https://skilly-online.herokuapp.com/files/lecturePreview/${item.previewImage}`}
           width="30"
           height="30"
-          alt={item.categoryName}
+          alt={item.title}
         />
-        <span className="pl-3">{item.categoryName}</span>
+        <span className="pl-3">{item.title}</span>
       </a>
     </div>
   );
