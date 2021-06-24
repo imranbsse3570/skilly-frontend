@@ -7,7 +7,7 @@ import CourseObjective from "./CourseObjective/CourseObjective";
 
 const CourseCriculum = ({ course }) => {
   return (
-    <div className="courseCricullum box-shadow">
+    <div id="courseCricullum" className="courseCricullum box-shadow">
       <Tabs defaultActiveKey="overview" id="uncontrolled-tab-example">
         <Tab eventKey="overview" title="Overview">
           {

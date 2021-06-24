@@ -32,6 +32,10 @@ const CourseDetails = () => {
             <CoursePreview
               src={courseData.previewImage}
               title={courseData.title}
+              lectures={courseData.lectures
+                .filter((lecture) => !lecture.isLocked)
+                .map((lecture) => lecture.source)}
+              courseId={courseData._id}
             />
             <CourseContent
               title={courseData.title}
@@ -43,8 +47,8 @@ const CourseDetails = () => {
             />
             <CourseCriculum course={courseData} />
           </div>
-          <div className="col-lg-4">
-            <ProductForm />
+          <div className="col-lg-4 custom-top-padding">
+            <ProductForm course={courseData} />
             <InstructorWidget />
             {/* <CategoriesSidebar /> */}
           </div>

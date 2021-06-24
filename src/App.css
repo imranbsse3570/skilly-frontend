@@ -562,6 +562,12 @@ h6 {
   }
 }
 
+@media (max-width: 992px) {
+  .custom-top-padding {
+    padding-top: 20px;
+  }
+}
+
 @keyframes slideOutUp {
   0% {
     transform: translateY(0px);

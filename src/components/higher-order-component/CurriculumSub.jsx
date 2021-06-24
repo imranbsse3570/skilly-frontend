@@ -46,12 +46,17 @@ const CurriculumSub = ({ openState, changeVideo, lecture, courseId }) => {
       </Accordion>
       <AlertDismissible
         data={{
+          style: {
+            maxWidth: "80%",
+            width: "80%",
+            border: "1px solid",
+          },
           showPopup,
           setShowPopUp: setShowPopup,
           popupData: {
             heading: lecture.title,
             body: <MediaPlayer videoUrl={videoUrl} />,
-            popupType: "primary",
+            popupType: "dark",
           },
         }}
       />

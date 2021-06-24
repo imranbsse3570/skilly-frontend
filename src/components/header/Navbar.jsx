@@ -1,13 +1,14 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import logo from "../../images/skilly-logo.png";
 
 const Header = () => {
   return (
     <Navbar className="p-3 site-header box-shadow" collapseOnSelect expand="lg">
       <Navbar.Brand>
         <NavLink to="/" as="a">
-          Skilly
+          {logo ? <img width="100" src={logo} alt="Skilly" /> : "Skilly"}
         </NavLink>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />

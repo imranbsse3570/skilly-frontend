@@ -1,31 +1,75 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
+import { NavLink as Link } from "react-router-dom";
+import currencyFormatter from "currency-formatter";
+
+import { getCourseData } from "../../services/course";
 import "./checkout.css";
+import AlertDismissible from "../../util/AlertDismissible";
 
 const stripePromise = loadStripe(
   "pk_test_51IzZgmLLnvDoXWyo3ylp4Cn7f23mPqkniEc7mLnfjJ5THdSvA7QUUKleJQFngbrJUV8hC5003zow7Hlptmy4D59R00C0amFEzd"
 );
 
-const ProductDisplay = ({ handleClick }) => (
-  <section>
+const ProductDisplay = ({ handleClick, course }) => (
+  <section style={{ maxWidth: 600 }} className="mx-auto border rounded">
     <div className="product">
       <img
-        src="https://i.imgur.com/EHyR2nP.png"
-        alt="The cover of Stubborn Attachments"
+        width="100%"
+        src={`https://skilly-online.herokuapp.com/files/coursePreview/${course.previewImage}?width=600`}
+        alt={course.title}
       />
-      <div className="description">
-        <h3>Stubborn Attachments</h3>
-        <h5>$20.00</h5>
+      <div className="description p-3">
+        <h3 className="font-weight-bold">
+          <Link as="a" to={`../../${course.slug}`}>
+            {course.title}
+          </Link>
+        </h3>
+        <div className="ratings text-warning">
+          <i className={`${course.rating >= 1 ? "fas" : "far"} fa-star`}></i>
+          <i className={`${course.rating >= 2 ? "fas" : "far"} fa-star`}></i>
+          <i className={`${course.rating >= 3 ? "fas" : "far"} fa-star`}></i>
+          <i className={`${course.rating >= 4 ? "fas" : "far"} fa-star`}></i>
+          <i className={`${course.rating >= 5 ? "fas" : "far"} fa-star`}></i>
+        </div>
+        <br />
+        <p>{course.description}</p>
       </div>
+      <button
+        type="button"
+        id="checkout-button"
+        role="link"
+        className="bg-primary"
+        onClick={() => handleClick(course._id)}
+      >
+        <span className="text-light">
+          Proceed to Checkout &nbsp;
+          <span className="text-warning">
+            {course.comparePrice && course.comparePrice > course.price ? (
+              <span>
+                <span className="font-weight-bold">
+                  {currencyFormatter.format(course.price, { code: "USD" })}
+                </span>
+                &nbsp; -
+                <span className="pl-2">
+                  <del>
+                    {currencyFormatter.format(course.comparePrice, {
+                      code: "USD",
+                    })}
+                  </del>
+                </span>
+                )
+              </span>
+            ) : (
+              <span className="font-weight-bold">
+                {currencyFormatter.format(course.price, { code: "USD" })}
+              </span>
+            )}
+          </span>
+        </span>
+      </button>
     </div>
-    <button
-      type="button"
-      id="checkout-button"
-      role="link"
-      onClick={handleClick}
-    >
-      Checkout
-    </button>
   </section>
 );
 
@@ -37,8 +81,23 @@ const Message = ({ message }) => (
 
 export default function Checkout() {
   const [message, setMessage] = useState("");
+  const { courseId } = useParams();
+  const [courseData, setCourseData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [showPopup, setShowPopUp] = useState(false);
+  const [popupData, setPopUpData] = useState({});
 
   useEffect(() => {
+    const fetchData = async () => {
+      const { results, data } = await getCourseData(courseId);
+      if (results > 0) {
+        setCourseData(data.docs[0]);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
     const query = new URLSearchParams(window.location.search);
 
     if (query.get("success")) {
@@ -52,52 +111,84 @@ export default function Checkout() {
     }
   }, []);
 
-  const handleClick = async (event) => {
+  const handleClick = async (id) => {
     const stripe = await stripePromise;
 
-    var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYmRmYTcyN2IyMThjMDAxNTUyYzFmNSIsImlhdCI6MTYyMzA2OTY5MywiZXhwIjoxNjMwODQ1NjkzfQ.yd1Nf9z8mUob1F9IzlN_9-vovpOgnNNyNOyS0_gy5m0"
-    );
-    myHeaders.append(
-      "Cookie",
-      "jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYmRmYTcyN2IyMThjMDAxNTUyYzFmNSIsImlhdCI6MTYyMzA2OTY5MywiZXhwIjoxNjMwODQ1NjkzfQ.yd1Nf9z8mUob1F9IzlN_9-vovpOgnNNyNOyS0_gy5m0"
-    );
+    if (localStorage.getItem("token")) {
+      var myHeaders = new Headers();
+      myHeaders.append(
+        "Authorization",
+        `Bearer ${localStorage.getItem("token")}`
+      );
 
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
 
-    const response = await fetch(
-      "http://localhost:8000/api/v1/courses/60bdfb367b218c001552c1f7/checkout",
-      requestOptions
-    );
+      const response = await fetch(
+        `https://skilly-online.herokuapp.com/api/v1/courses/${id}/checkout`,
+        requestOptions
+      );
 
-    const session = (await response.json()).session;
+      const session = (await response.json()).session;
 
-    console.log(session);
+      console.log(session);
 
-    // When the customer clicks on the button, redirect them to Checkout.
-    const result = await stripe.redirectToCheckout({
-      sessionId: session.id,
-    });
+      // When the customer clicks on the button, redirect them to Checkout.
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
 
-    if (result.error) {
-      // If `redirectToCheckout` fails due to a browser or network
-      // error, display the localized error message to your customer
-      // using `result.error.message`.
+      if (result.error) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `result.error.message`.
+      }
+    } else {
+      setPopUpData({
+        heading: "Warning",
+        body: (
+          <p>
+            <span>
+              Please&nbsp;
+              <Link className="font-weight-bold" as="a" to="/login">
+                Login
+              </Link>
+              /
+              <Link className="font-weight-bold" as="a" to="/register">
+                Register
+              </Link>
+              &nbsp;in order to checkout
+            </span>
+          </p>
+        ),
+        popupType: "warning",
+      });
+      setShowPopUp(true);
     }
   };
 
   return (
-    <div className="stripe-checkout">
-      {message ? (
-        <Message message={message} />
+    <div className="my-5">
+      {loading ? (
+        <p className="text-center">Loading...</p>
       ) : (
-        <ProductDisplay handleClick={handleClick} />
+        <div className="stripe-checkout">
+          {message ? (
+            <Message message={message} />
+          ) : (
+            <ProductDisplay course={courseData} handleClick={handleClick} />
+          )}
+          <AlertDismissible
+            data={{
+              showPopup,
+              setShowPopUp,
+              popupData,
+            }}
+          />
+        </div>
       )}
     </div>
   );

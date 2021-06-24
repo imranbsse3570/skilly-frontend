@@ -42,3 +42,23 @@ export const signUp = async (name, email, password, confirmPassword, role) => {
   const result = await promise.json();
   return result;
 };
+
+export const getMyProfileData = async () => {
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${localStorage.getItem("token")}`);
+
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  const response = await fetch(
+    `https://skilly-online.herokuapp.com/api/v1/users/myProfile`,
+    requestOptions
+  );
+
+  const result = await response.json();
+
+  return result;
+};

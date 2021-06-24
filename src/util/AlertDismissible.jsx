@@ -1,7 +1,7 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 const AlertDismissible = ({ data }) => {
-  const { showPopup, setShowPopUp, popupData } = data;
+  const { showPopup, setShowPopUp, popupData, style } = data;
 
   if (showPopup) {
     return (
@@ -15,12 +15,15 @@ const AlertDismissible = ({ data }) => {
       >
         <Alert
           className="custom-alert"
+          style={style}
           variant={popupData.popupType}
           onClose={() => setShowPopUp(false)}
           dismissible
         >
-          <Alert.Heading>{popupData.heading}</Alert.Heading>
-          <p className="mb-0">{popupData.body}</p>
+          <Alert.Heading>
+            <span>{popupData.heading}</span>
+          </Alert.Heading>
+          <div className="mb-0">{popupData.body}</div>
         </Alert>
       </div>
     );
