@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink as Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 
 const SlideWithCaption = ({
@@ -24,9 +25,9 @@ const SlideWithCaption = ({
       <Carousel.Caption>
         <h3>{slideHeading}</h3>
         <p>{slideDetail}</p>
-        <a className="btn btn-primary" href={slideUrl}>
+        <Link className="btn btn-primary" to={slideUrl} as="a">
           {slideText}
-        </a>
+        </Link>
       </Carousel.Caption>
     </Carousel.Item>
   );

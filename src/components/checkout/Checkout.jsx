@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { NavLink as Link } from "react-router-dom";
 import currencyFormatter from "currency-formatter";
 
+import { handleCheckout } from "../../services/checkout";
 import { getCourseData } from "../../services/course";
 import "./checkout.css";
 import AlertDismissible from "../../util/AlertDismissible";
@@ -46,6 +47,7 @@ const ProductDisplay = ({ handleClick, course }) => (
         <span className="text-light">
           Proceed to Checkout &nbsp;
           <span className="text-warning">
+            (
             {course.comparePrice && course.comparePrice > course.price ? (
               <span>
                 <span className="font-weight-bold">
@@ -115,36 +117,48 @@ export default function Checkout() {
     const stripe = await stripePromise;
 
     if (localStorage.getItem("token")) {
-      var myHeaders = new Headers();
-      myHeaders.append(
-        "Authorization",
-        `Bearer ${localStorage.getItem("token")}`
-      );
+      const response = await handleCheckout(id);
 
-      var requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow",
-      };
+      console.log(response);
 
-      const response = await fetch(
-        `https://skilly-online.herokuapp.com/api/v1/courses/${id}/checkout`,
-        requestOptions
-      );
+      if (response.status !== "fail") {
+        const session = response.session;
 
-      const session = (await response.json()).session;
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
 
-      console.log(session);
-
-      // When the customer clicks on the button, redirect them to Checkout.
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
-      });
-
-      if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer
-        // using `result.error.message`.
+        if (result.error) {
+          setPopUpData({
+            heading: "Error",
+            body: (
+              <p>
+                <span>
+                  Error in redirecting to checkout. Due to Slow Network.
+                  <br />
+                  Thanks!
+                </span>
+              </p>
+            ),
+            popupType: "danger",
+          });
+          setShowPopUp(true);
+        }
+      } else {
+        setPopUpData({
+          heading: "Error",
+          body: (
+            <p>
+              <span>
+                You Have already purchased this course.
+                <br />
+                Thanks!
+              </span>
+            </p>
+          ),
+          popupType: "danger",
+        });
+        setShowPopUp(true);
       }
     } else {
       setPopUpData({
