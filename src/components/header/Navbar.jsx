@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { NavLink as Link } from "react-router-dom";
+import { NavLink as Link, useNavigate } from "react-router-dom";
 
 import { GlobalContext } from "../../App";
 import logo from "../../images/skilly-logo.png";
 
 const Header = () => {
-  const { userData: user } = useContext(GlobalContext);
+  const navigate = useNavigate();
+  const { userData: user, setIsLoading } = useContext(GlobalContext);
 
   return (
     <Navbar className="p-3 site-header box-shadow" collapseOnSelect expand="lg">
@@ -28,6 +29,13 @@ const Header = () => {
           </Link>
           {user ? (
             <>
+              {user.role !== "student" ? (
+                <Link to="users/createNewCourse" as="a" className="nav-link">
+                  Create New Course
+                </Link>
+              ) : (
+                <></>
+              )}
               <NavDropdown
                 title={
                   <>
@@ -46,16 +54,21 @@ const Header = () => {
                 <Link to="users/myProfile" className="dropdown-item">
                   My Profile
                 </Link>
-                {/* <NavDropdown.Item href="#action/3.2">
-                  Another action
+                <Link to="users/myCourses" className="dropdown-item">
+                  My Courses
+                </Link>
+                <NavDropdown.Item
+                  onClick={(e) => {
+                    e.preventDefault();
+                    localStorage.removeItem("token");
+                    setTimeout(() => {
+                      setIsLoading(true);
+                      navigate("/");
+                    }, 2000);
+                  }}
+                >
+                  Logout
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item> */}
               </NavDropdown>
             </>
           ) : (

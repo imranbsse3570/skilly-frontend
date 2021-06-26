@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { login } from "../../services/account";
 import { NavLink as Link, useNavigate } from "react-router-dom";
 
+import { login } from "../../services/account";
 import { validateEmail, validatePassword } from "../../util/validate";
 import AlertDismissible from "../../util/AlertDismissible";
+import { GlobalContext } from "../../App";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const LogIn = () => {
   const [loginTxt, setLoginTxt] = useState("Login");
   const [showPopup, setShowPopUp] = useState(false);
   const [popupData, setPopUpData] = useState({});
+
+  const { setIsLoading } = useContext(GlobalContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -43,6 +46,7 @@ const LogIn = () => {
         });
 
         setTimeout(() => {
+          setIsLoading(true);
           navigate("/");
         }, 5000);
       } catch (err) {

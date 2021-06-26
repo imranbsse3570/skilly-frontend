@@ -87,7 +87,6 @@ const Courses = () => {
                   coursesInCategory && coursesInCategory.length > 0 ? (
                     <div className="row collection-grids-mobile">
                       {coursesInCategory.map((course, index) => {
-                        course.category = categoryId;
                         return (
                           <div
                             key={`${course._id}--${index}`}

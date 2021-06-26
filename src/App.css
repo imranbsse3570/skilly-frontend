@@ -429,18 +429,19 @@ h6 {
 }
 
 .overlay-photo-upload {
+  transition: all 0.5s ease-in-out;
+  transform: translateY(100%);
   display: none;
-  transition: 0.3s all linear;
 }
 
-.overlay-photo-upload:hover {
-  display: block;
+.profile-upload:hover .overlay-photo-upload {
   position: absolute;
   height: 40%;
   background: rgb(0, 0, 0, 0.5);
-  bottom: 0;
+  transform: translateY(-100%);
   width: 100%;
   color: #fff;
+  display: block;
 }
 
 #output-screen-display textarea {
@@ -556,6 +557,20 @@ h6 {
     display: block;
     margin: 5px auto;
   }
+
+  .w-sm-75 {
+    width: 75% !important;
+  }
+
+  .overlay-photo-upload {
+    position: absolute;
+    height: 40%;
+    background: rgb(0, 0, 0, 0.5);
+    transform: translateY(-100%);
+    width: 100%;
+    color: #fff;
+    display: block;
+  }
 }
 
 @media (max-width: 578px) {
@@ -601,5 +616,21 @@ h6 {
   }
   100% {
     transform: rotate(360deg) scale(2);
+  }
+}
+
+/* util classes */
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
   }
 }

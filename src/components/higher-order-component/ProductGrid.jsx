@@ -71,7 +71,7 @@ const ProductGrid = ({ course }) => {
       <div className="social-wrapper">
         <ul className="social">
           <li>
-            <Link to={`/courses/${course.category}/${course.slug}`} as="a">
+            <Link to={`/courses/${course.category.slug}/${course.slug}`} as="a">
               <i className="fa fa-eye"></i>
             </Link>
           </li>
@@ -82,7 +82,7 @@ const ProductGrid = ({ course }) => {
               </Link>
             ) : isPurchased ? (
               <Link to={`../../${course.slug}/lectures/${lectureId}`} as="a">
-                <i className="fas fa-edit"></i>
+                <i className="fas fa-video"></i>
               </Link>
             ) : (
               <Link
@@ -94,7 +94,7 @@ const ProductGrid = ({ course }) => {
             )}
           </li>
           <li>
-            <Link to={`/courses`} as="a">
+            <Link to={`/courses/${course.category.slug}`} as="a">
               <i className="fa fa-random"></i>
             </Link>
           </li>

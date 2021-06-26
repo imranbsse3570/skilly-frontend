@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
@@ -12,8 +12,10 @@ import {
 } from "../../util/validate";
 import AlertDismissible from "../../util/AlertDismissible";
 import { signUp } from "../../services/account";
+import { GlobalContext } from "../../App";
 
 const SignUp = () => {
+  const { setIsLoading } = useContext(GlobalContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -56,6 +58,7 @@ const SignUp = () => {
         });
 
         setTimeout(() => {
+          setIsLoading(true);
           navigate("/");
         }, 5000);
       } catch (err) {

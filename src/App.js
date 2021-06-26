@@ -30,9 +30,10 @@ function App() {
   const [state, dispatch] = useReducer(userReducer, profileData);
 
   const login = (user) => {
+    setProfileData(user);
     dispatch({
       type: "login",
-      payload: user,
+      payload: profileData,
     });
   };
 
@@ -43,9 +44,10 @@ function App() {
   };
 
   const updateProfile = (user) => {
+    setProfileData(user);
     dispatch({
       type: "updateUser",
-      payload: user,
+      payload: profileData,
     });
   };
 
@@ -62,14 +64,23 @@ function App() {
       }
     };
 
-    fetchData();
-  }, []);
+    if (isLoading) {
+      console.log("logging");
+      fetchData();
+    }
+  }, [isLoading]);
 
   return (
     <div>
       {!isLoading ? (
         <GlobalContext.Provider
-          value={{ userData: profileData, login, logout, updateProfile }}
+          value={{
+            userData: profileData,
+            login,
+            logout,
+            updateProfile,
+            setIsLoading,
+          }}
         >
           <RouterConfig data={GlobalConfigData} />
         </GlobalContext.Provider>
