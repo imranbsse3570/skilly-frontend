@@ -452,6 +452,34 @@ h6 {
   color: #fff;
 }
 
+.rdw-editor-main {
+  padding: 20px;
+  height: 280px;
+}
+
+.rdw-editor-toolbar {
+  border: none;
+  padding: 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.rdw-option-wrapper {
+  height: 30px;
+  padding: 5px;
+}
+
+.rdw-image-modal,
+.rdw-emoji-modal,
+.rdw-embedded-modal {
+  right: 5px;
+  left: auto;
+  height: auto;
+}
+
+.rdw-emoji-modal {
+  max-height: 200px;
+}
+
 .rotating-element-360 {
   animation: 0.4s linear rotating360 infinite;
 }
@@ -632,5 +660,9 @@ h6 {
 
   .mobile-only {
     display: block;
+  }
+
+  .cst {
+    display: block !important;
   }
 }
