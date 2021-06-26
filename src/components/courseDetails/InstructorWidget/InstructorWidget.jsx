@@ -1,31 +1,54 @@
 import React from "react";
-const InstructorWidget = () => {
+import { NavLink as Link } from "react-router-dom";
+
+const InstructorWidget = ({ author }) => {
   return (
     <div className="box-shadow widget instractors text-center border container py-3">
       <figure>
         <img
-          src="https://picsum.photos/id/237/150/150?grayscale"
+          src={`https://skilly-online.herokuapp.com/files/users/${author.photo}`}
           alt=""
           width="150"
           height="150"
           className="rounded-circle"
         />
       </figure>
-      <h4>Lisa Sordan</h4>
-      <span>Web designer</span>
+      <h4>{author.name}</h4>
+      <span>{author.designation}</span>
       <div className="socials">
-        <a href="#" className="facebook p-1">
-          <i className="fab fa-facebook-f"></i>
-        </a>
-        <a href="#" className="twitter p-1">
-          <i className="fab fa-twitter"></i>
-        </a>
-        <a href="#" className="linkedin p-1">
-          <i className="fab fa-linkedin-in"></i>
-        </a>
-        <a href="#" className="youtube p-1">
-          <i className="fab fa-youtube"></i>
-        </a>
+        {author.facebookLink ? (
+          <Link
+            to={`${author.facebookLink}`}
+            className="facebook p-1"
+            as="a"
+            target="_blank"
+          >
+            <i className="fab fa-facebook-f"></i>
+          </Link>
+        ) : (
+          <></>
+        )}
+        {author.twitterLink ? (
+          <Link to={`${author.twitterLink}`} className="twitter p-1" as="a">
+            <i className="fab fa-twitter"></i>
+          </Link>
+        ) : (
+          <></>
+        )}
+        {author.linkedInLink ? (
+          <Link to={`${author.linkedInLink}`} className="linkedin p-1" as="a">
+            <i className="fab fa-linkedin-in"></i>
+          </Link>
+        ) : (
+          <></>
+        )}
+        {author.youtubeLink ? (
+          <Link to={`${author.youtubeLink}`} className="youtube p-1" as="a">
+            <i className="fab fa-youtube"></i>
+          </Link>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

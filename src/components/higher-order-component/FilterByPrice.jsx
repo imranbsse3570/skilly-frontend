@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import currencyFormatter from "currency-formatter";
 
-const FilterByPrice = () => {
-  const [moneyMax, setMoneyMax] = useState(200);
-
-  const moneyFilterHandleChange = (e) => {
-    setMoneyMax(e.target.value);
-  };
-
+const FilterByPrice = ({ moneyMax, moneyFilterHandleChange }) => {
   return (
     <div className="box-shadow filter-by-price container py-2 border">
       <Form>

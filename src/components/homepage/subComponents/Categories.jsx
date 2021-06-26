@@ -1,40 +1,48 @@
-import React from "react";
-import Category from "./Category";
+import React, { useState, useEffect } from "react";
+import Category from "../../higher-order-component/Category";
+import { getCategories } from "../../../services/category";
 
 const Categories = ({ data }) => {
-  let subHeading = undefined;
-  if (data.subHeading) {
-    subHeading = <h3 className="h4 text-center">{data.subHeading}</h3>;
-  }
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const fetchingData = async () => {
+      try {
+        const result = await getCategories(8);
+        setCategories(result.data.docs);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
-  let heading = undefined;
-  if (data.heading) {
-    heading = <h1 className="h2 text-center">{data.heading}</h1>;
-  }
-
-  let categories = undefined;
-  if (data.category && data.category.length > 0) {
-    categories = data.category.map((item, index) => {
-      return <Category key={`${item.categoryName}--${index}`} item={item} />;
-    });
-  }
+    fetchingData();
+  }, []);
 
   return (
     <div style={{ backgroundColor: "#f3f3f3" }}>
       <div className="container pt-5 pb-5">
-        {subHeading || heading ? (
-          <div className="row">
-            <div className="col-lg-7 col-md-9 m-auto text-center">
-              <div className="sec-heading">
-                {subHeading ? subHeading : ""}
-                {heading ? heading : ""}
-              </div>
+        <div className="row">
+          <div className="col-lg-7 col-md-9 m-auto text-center">
+            <div className="sec-heading">
+              <h3 className="h4 text-center">Top Categories</h3>
+              <h1 className="h2 text-center">
+                Pick the right category Build your career
+              </h1>
             </div>
           </div>
+        </div>
+        {categories.length > 0 ? (
+          <div className="row">
+            {categories.map((item, index) => (
+              <Category
+                key={`${item.slug}--${index}`}
+                item={item}
+                path="/courses"
+              />
+            ))}
+          </div>
         ) : (
-          ""
+          <p className="text-center">Loading...</p>
         )}
-        {categories ? <div className="row">{categories}</div> : ""}
       </div>
     </div>
   );

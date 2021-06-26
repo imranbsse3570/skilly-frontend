@@ -10,6 +10,12 @@ import Login from "../components/Login/Login";
 import SignUp from "../components/signup/SignUp";
 import LecturePortal from "../components/LecturePortal/LecturePortal";
 import ContactUs from "../components/ContactUs/ContactUs";
+import CategoriesPage from "../components/categories/CategoriesPage";
+import Checkout from "../components/checkout/Checkout";
+import PageNotFound from "../components/notFound/PageNotFound";
+import MyProfileData from "../components/account/MyProfileData";
+import MyCourses from "../components/account/MyCourses";
+import CreateNewCourse from "../components/createNewCourse/CreateNewCourse";
 
 const RouterConfig = ({ data }) => {
   return (
@@ -19,12 +25,20 @@ const RouterConfig = ({ data }) => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/courses">
+          <Route path="/" element={<CategoriesPage />} />
           <Route path="/:categoryId">
             <Route path="/" element={<Courses />} />
             <Route path="/:courseId">
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="/" element={<CourseDetails />} />
             </Route>
           </Route>
+        </Route>
+
+        <Route path="/users">
+          <Route path="/myProfile" element={<MyProfileData />} />
+          <Route path="/myCourses" element={<MyCourses />} />
+          <Route path="/createNewCourse" element={<CreateNewCourse />} />
         </Route>
 
         <Route path="/:courseId">
@@ -37,7 +51,7 @@ const RouterConfig = ({ data }) => {
         <Route path="/pages">
           <Route path="/contact-us" element={<ContactUs />} />
         </Route>
-        <Route path="*" element={<h2>Not Found</h2>} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
       <Footer data={data.footer} />
