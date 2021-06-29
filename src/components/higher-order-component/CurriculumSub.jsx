@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
-import AlertDismissible from "../../util/AlertDismissible";
+import AlertDismissible from "./AlertDismissible";
 import MediaPlayer from "../higher-order-component/MediaPlayer";
 
 const CurriculumSub = ({ openState, changeVideo, lecture, courseId }) => {

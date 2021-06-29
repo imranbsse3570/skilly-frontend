@@ -5,7 +5,7 @@ import { NavLink as Link, useNavigate } from "react-router-dom";
 
 import { login } from "../../services/account";
 import { validateEmail, validatePassword } from "../../util/validate";
-import AlertDismissible from "../../util/AlertDismissible";
+import AlertDismissible from "../higher-order-component/AlertDismissible";
 import { GlobalContext } from "../../App";
 
 const LogIn = () => {

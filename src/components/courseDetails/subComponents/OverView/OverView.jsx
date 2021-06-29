@@ -1,10 +1,15 @@
 import React from "react";
+
+import { Parser } from "html-to-react";
+
 const OverView = ({
   description,
   totalDuration,
   noOfLectures,
   requirements,
 }) => {
+  const htmlParser = new Parser();
+
   return (
     <div className="container p-3 border border-top-0">
       <div className="tab-pane">
@@ -41,7 +46,15 @@ const OverView = ({
         </ul>
 
         <h4 className="tab-title">Description</h4>
-        <p>{description}</p>
+        <div
+          style={{
+            width: "100%",
+            overflow: "hidden",
+            maxWidth: "100%",
+          }}
+        >
+          {htmlParser.parse(description)}
+        </div>
         <h4 className="tab-title">Requirements for this course</h4>
         <ul className="list-unstyled">
           {requirements.map((requirement, index) => (

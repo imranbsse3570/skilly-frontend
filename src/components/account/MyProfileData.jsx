@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 
 import { GlobalContext } from "../../App";
 import { updateProfile as updateProfileSave } from "../../services/account";
-import AlertDismissible from "../../util/AlertDismissible";
+import AlertDismissible from "../higher-order-component/AlertDismissible";
 
 const MyProfileData = () => {
   const { userData, updateProfile } = useContext(GlobalContext);

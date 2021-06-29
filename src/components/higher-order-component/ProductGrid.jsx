@@ -77,7 +77,7 @@ const ProductGrid = ({ course }) => {
           </li>
           <li>
             {isAuthor ? (
-              <Link to={`/courses`} as="a">
+              <Link to={`../../../../users/updateCourse/${course.slug}`} as="a">
                 <i className="fas fa-edit"></i>
               </Link>
             ) : isPurchased ? (

@@ -10,7 +10,7 @@ import {
   validateName,
   comparePassword,
 } from "../../util/validate";
-import AlertDismissible from "../../util/AlertDismissible";
+import AlertDismissible from "../higher-order-component/AlertDismissible";
 import { signUp } from "../../services/account";
 import { GlobalContext } from "../../App";
 

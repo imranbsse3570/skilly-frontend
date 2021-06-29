@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AlertDismissible from "../../../util/AlertDismissible";
+import AlertDismissible from "../../higher-order-component/AlertDismissible";
 import MediaPlayer from "../../higher-order-component/MediaPlayer";
 
 const CoursePreview = ({ src, title, lectures, courseId }) => {

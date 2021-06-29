@@ -15,7 +15,8 @@ import Checkout from "../components/checkout/Checkout";
 import PageNotFound from "../components/notFound/PageNotFound";
 import MyProfileData from "../components/account/MyProfileData";
 import MyCourses from "../components/account/MyCourses";
-import CreateNewCourse from "../components/createNewCourse/CreateNewCourse";
+import CreateNewCourse from "../components/coursesEdit/CreateNewCourse";
+import UpdateCourse from "../components/coursesEdit/updateCourse";
 
 const RouterConfig = ({ data }) => {
   return (
@@ -39,6 +40,7 @@ const RouterConfig = ({ data }) => {
           <Route path="/myProfile" element={<MyProfileData />} />
           <Route path="/myCourses" element={<MyCourses />} />
           <Route path="/createNewCourse" element={<CreateNewCourse />} />
+          <Route path="/updateCourse/:courseSlug" element={<UpdateCourse />} />
         </Route>
 
         <Route path="/:courseId">

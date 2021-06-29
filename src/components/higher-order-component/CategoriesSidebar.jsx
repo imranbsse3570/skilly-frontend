@@ -10,7 +10,7 @@ const CategoriesSidebar = ({ categories }) => {
           {categories.map((category) => {
             return (
               <li className="list-group-item" key={category._id}>
-                <Link to={`../${category.slug}`} as="a">
+                <Link to={`../../../../courses/${category.slug}`} as="a">
                   {category.title}
                   <span className="float-right">
                     ({category.courses.length})

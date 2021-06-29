@@ -3,9 +3,11 @@ import { createContext, useState, useEffect, useReducer } from "react";
 import GlobalConfigData from "./config/globalConfig.json";
 import RouterConfig from "./routes/Routes";
 import { getMyProfileData } from "./services/account";
+import PopUpModal from "./components/higher-order-component/PopUpModal";
 import "./App.css";
 
 export const GlobalContext = createContext(undefined);
+export const ModalPopUpContext = createContext(undefined);
 
 function userReducer(state, action) {
   switch (action.type) {
@@ -24,6 +26,9 @@ function userReducer(state, action) {
 }
 
 function App() {
+  const [ok, setOk] = useState(false);
+  const [modalData, setModalData] = useState({});
+  const [modalShow, setModalShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [profileData, setProfileData] = useState(undefined);
 
@@ -65,7 +70,6 @@ function App() {
     };
 
     if (isLoading) {
-      console.log("logging");
       fetchData();
     }
   }, [isLoading]);
@@ -82,7 +86,24 @@ function App() {
             setIsLoading,
           }}
         >
-          <RouterConfig data={GlobalConfigData} />
+          <ModalPopUpContext.Provider
+            value={{
+              ok,
+              setOk,
+              modalData,
+              setModalData,
+              modalShow,
+              setModalShow,
+            }}
+          >
+            <RouterConfig data={GlobalConfigData} />
+            <PopUpModal
+              show={modalShow}
+              onHide={setModalShow}
+              setOk={setOk}
+              data={modalData}
+            />
+          </ModalPopUpContext.Provider>
         </GlobalContext.Provider>
       ) : (
         <p className="py-5 text-center">Loading...</p>

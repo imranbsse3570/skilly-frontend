@@ -7,7 +7,7 @@ import currencyFormatter from "currency-formatter";
 import { handleCheckout } from "../../services/checkout";
 import { getCourseData } from "../../services/course";
 import "./checkout.css";
-import AlertDismissible from "../../util/AlertDismissible";
+import AlertDismissible from "../higher-order-component/AlertDismissible";
 
 const stripePromise = loadStripe(
   "pk_test_51IzZgmLLnvDoXWyo3ylp4Cn7f23mPqkniEc7mLnfjJ5THdSvA7QUUKleJQFngbrJUV8hC5003zow7Hlptmy4D59R00C0amFEzd"

@@ -34,7 +34,7 @@ const CategoriesPage = () => {
           </div>
           <div className="row">
             {categories.map((category) => (
-              <Category item={category} />
+              <Category key={category._id} item={category} />
             ))}
           </div>
         </>
