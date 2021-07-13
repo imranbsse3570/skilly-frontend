@@ -1,21 +1,20 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { Form, Row, Col, Button } from "react-bootstrap";
 import { EditorState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
+import { useNavigate } from "react-router-dom";
 
 import Slide4 from "../../images/slide4.jpg";
-import { GlobalContext } from "../../App";
-import AlertDismissible from "../higher-order-component/AlertDismissible";
+import { GlobalContext, AlertDismissibleContext } from "../../App";
 import EditorContainer from "../higher-order-component/EditorContainer";
 import ListInput from "../higher-order-component/ListInput";
 import { createNewCourse } from "../../services/course";
 import { getCategories } from "../../services/category";
+import { getMyProfileData } from "../../services/account";
 
 const CreateNewCourse = () => {
   const previewImageRef = useRef();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
@@ -31,8 +30,12 @@ const CreateNewCourse = () => {
 
   const [categoriesList, setCategoriesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [showPopup, setShowPopUp] = useState(false);
-  const [popupData, setPopUpData] = useState({});
+
+  const { userData, updateProfile } = useContext(GlobalContext);
+  // Alert Dismissible Context
+  const { setShowPopUp, setPopUpData, setStyle } = useContext(
+    AlertDismissibleContext
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,8 +54,6 @@ const CreateNewCourse = () => {
 
     fetchData();
   }, []);
-
-  const { userData } = useContext(GlobalContext);
 
   const createCourseSubmit = async (e) => {
     try {
@@ -92,11 +93,19 @@ const CreateNewCourse = () => {
 
       const result = await createNewCourse(formdata);
 
+      const { data } = await getMyProfileData();
+
+      updateProfile(data.user);
+
       setPopUpData({
         popupType: "success",
         heading: "Success",
         body: <p>Course {title} is created successfully</p>,
       });
+
+      setTimeout(() => {
+        navigate("../../../users/myCourses");
+      }, 3000);
     } catch (err) {
       setPopUpData({
         popupType: "danger",
@@ -117,7 +126,7 @@ const CreateNewCourse = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container py-sm-custom-5">
       {userData ? (
         userData.role !== "student" ? (
           <>
@@ -379,13 +388,6 @@ const CreateNewCourse = () => {
                       </div>
                     </div>
                   </Form>
-                  <AlertDismissible
-                    data={{
-                      showPopup,
-                      setShowPopUp,
-                      popupData,
-                    }}
-                  />
                 </div>
               </>
             ) : (

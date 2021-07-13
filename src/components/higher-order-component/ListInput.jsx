@@ -3,6 +3,16 @@ import Form from "react-bootstrap/Form";
 
 const ListInput = ({ requirements, setRequirements, placeholder }) => {
   const inputRef = useRef();
+  const addbutton = useRef();
+
+  const onListAdd = () => {
+    const data = inputRef.current.value.trim();
+
+    if (data.length > 0 && !requirements.includes(data)) {
+      setRequirements([...requirements, data]);
+    }
+    inputRef.current.value = "";
+  };
 
   return (
     <div>
@@ -32,17 +42,20 @@ const ListInput = ({ requirements, setRequirements, placeholder }) => {
         <></>
       )}
       <div style={{ position: "relative" }}>
-        <Form.Control as="textarea" placeholder={placeholder} ref={inputRef} />
+        <Form.Control
+          onKeyUp={function (e) {
+            if (e.keyCode === 13) {
+              addbutton.current.click();
+            }
+          }}
+          as="textarea"
+          placeholder={placeholder}
+          ref={inputRef}
+        />
         <span
           className="rounded-circle list-input-add-button"
-          onClick={() => {
-            const data = inputRef.current.value.trim();
-
-            if (data.length > 0 && !requirements.includes(data)) {
-              setRequirements([...requirements, data]);
-            }
-            inputRef.current.value = "";
-          }}
+          onClick={onListAdd}
+          ref={addbutton}
         >
           <i className="fas fa-plus"></i>
         </span>

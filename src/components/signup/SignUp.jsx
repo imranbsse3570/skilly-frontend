@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Form, Button } from "react-bootstrap";
 
 import { NavLink as Link, useNavigate } from "react-router-dom";
 
@@ -10,12 +9,16 @@ import {
   validateName,
   comparePassword,
 } from "../../util/validate";
-import AlertDismissible from "../higher-order-component/AlertDismissible";
+
 import { signUp } from "../../services/account";
-import { GlobalContext } from "../../App";
+import { GlobalContext, AlertDismissibleContext } from "../../App";
 
 const SignUp = () => {
   const { setIsLoading } = useContext(GlobalContext);
+  const { setShowPopUp, setPopUpData, setStyle } = useContext(
+    AlertDismissibleContext
+  );
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -24,8 +27,6 @@ const SignUp = () => {
   const [termsAgreed, setTermsAgreed] = useState(false);
   const [role, setRole] = useState("student");
   const [requestedToSignUp, setRequestedToSignUp] = useState(false);
-  const [showPopup, setShowPopUp] = useState(false);
-  const [popupData, setPopUpData] = useState({});
 
   // signup form submit function
   const signUpFormSubmit = (e) => {
@@ -250,13 +251,6 @@ const SignUp = () => {
           </Form>
         </div>
       </div>
-      <AlertDismissible
-        data={{
-          showPopup,
-          setShowPopUp,
-          popupData,
-        }}
-      />
     </div>
   );
 };

@@ -1,27 +1,40 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { Form, Row, Col, Button } from "react-bootstrap";
 import { EditorState } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 import { stateFromHTML as stateFromHTMLImport } from "draft-js-import-html";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-import { GlobalContext, ModalPopUpContext } from "../../App";
-import AlertDismissible from "../higher-order-component/AlertDismissible";
+import {
+  GlobalContext,
+  ModalPopUpContext,
+  AlertDismissibleContext,
+} from "../../App";
 import EditorContainer from "../higher-order-component/EditorContainer";
 import ListInput from "../higher-order-component/ListInput";
-import { updateCourse, getCourseData } from "../../services/course";
+import {
+  updateCourse,
+  getCourseData,
+  deleteCourse,
+} from "../../services/course";
 import { getCategories } from "../../services/category";
+import { getMyProfileData } from "../../services/account";
+import AddNewLecture from "../lectures/AddLectures";
 
 const UpdateCourse = () => {
   const { courseSlug } = useParams();
   const previewImageRef = useRef();
+  const navigate = useNavigate();
 
-  const { userData } = useContext(GlobalContext);
+  const { userData, updateProfile } = useContext(GlobalContext);
 
-  const { ok, setModalData, setModalShow } = useContext(ModalPopUpContext);
+  const { setModalData, setModalShow, setCallback } =
+    useContext(ModalPopUpContext);
+
+  // Alert Dismissible Context
+  const { setShowPopUp, setPopUpData, setStyle } = useContext(
+    AlertDismissibleContext
+  );
 
   const [courseData, setCourseData] = useState(undefined);
   const [title, setTitle] = useState("");
@@ -38,8 +51,6 @@ const UpdateCourse = () => {
 
   const [categoriesList, setCategoriesList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [showPopup, setShowPopUp] = useState(false);
-  const [popupData, setPopUpData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,68 +98,103 @@ const UpdateCourse = () => {
   }, []);
 
   const deleteCourseHandler = async (e) => {
-    try {
-      e.preventDefault();
-      setModalShow(true);
+    e.preventDefault();
+    setModalShow(true);
 
-      setModalData({
-        heading: "Delete",
-        body: <p>Are you sure you want to delete?</p>,
-      });
+    setModalData({
+      heading: "Delete",
+      body: <p>Are you sure you want to delete?</p>,
+    });
 
-      if (ok) {
-        console.log("ok");
-      } else {
-        console.log("not ok");
+    setCallback(() => async () => {
+      try {
+        const id = courseData._id;
+
+        await deleteCourse(id);
+
+        const { data } = await getMyProfileData();
+
+        updateProfile(data.user);
+
+        setPopUpData({
+          popupType: "success",
+          heading: "Success",
+          body: <p>Course {title} is successfully deleted</p>,
+        });
+        setShowPopUp(true);
+
+        setTimeout(() => {
+          navigate("../../../users/myCourses");
+        }, 3000);
+      } catch (err) {
+        console.log(err);
+        setPopUpData({
+          popupType: "danger",
+          heading: "Error",
+          body: err.message,
+        });
+        setShowPopUp(true);
       }
-    } catch (err) {}
+    });
   };
 
   const createCourseSubmit = async (e) => {
-    try {
-      e.preventDefault();
+    e.preventDefault();
+    setModalShow(true);
 
-      const formdata = new FormData();
+    setModalData({
+      heading: "Update",
+      body: <p>Are you sure you want to save changes?</p>,
+    });
 
-      formdata.append("isPublished", isPublished);
-      formdata.append("languages", language);
-      if (courseData.title !== title) {
-        formdata.append("title", title);
+    setCallback(() => async () => {
+      try {
+        const formdata = new FormData();
+
+        formdata.append("isPublished", isPublished);
+        formdata.append("languages", language);
+        if (courseData.title !== title) {
+          formdata.append("title", title);
+        }
+        formdata.append(
+          "description",
+          stateToHTML(description.getCurrentContent())
+        );
+        formdata.append("summary", summary);
+        requirements.forEach((requirement) => {
+          formdata.append("requirements", requirement);
+        });
+
+        formdata.append("price", price);
+        if (price <= comparePrice) {
+          formdata.append("comparePrice", comparePrice);
+        }
+
+        formdata.append("category", category);
+        objectives.forEach((objective) => {
+          formdata.append("objectives", objective);
+        });
+
+        await updateCourse(courseData._id, formdata);
+
+        const { data } = await getMyProfileData();
+
+        updateProfile(data.user);
+
+        setPopUpData({
+          popupType: "success",
+          heading: "Success",
+          body: <p>Course {title} is updated successfully</p>,
+        });
+      } catch (err) {
+        setPopUpData({
+          popupType: "danger",
+          heading: "Error",
+          body: err.message,
+        });
       }
-      formdata.append(
-        "description",
-        stateToHTML(description.getCurrentContent())
-      );
-      formdata.append("summary", summary);
-      requirements.forEach((requirement) => {
-        formdata.append("requirements", requirement);
-      });
-
-      formdata.append("price", price);
-      if (price <= comparePrice) {
-        formdata.append("comparePrice", comparePrice);
-      }
-
-      formdata.append("category", category);
-      objectives.forEach((objective) => {
-        formdata.append("objectives", objective);
-      });
-
-      const result = await updateCourse(courseData._id, formdata);
-
-      setPopUpData({
-        popupType: "success",
-        heading: "Success",
-        body: <p>Course {title} is updated successfully</p>,
-      });
-    } catch (err) {
-      setPopUpData({
-        popupType: "danger",
-        heading: "Error",
-        body: err.message,
-      });
-    }
-    setShowPopUp(true);
+      setShowPopUp(true);
+    });
   };
 
   const handleImageChange = async (e) => {
@@ -173,7 +219,7 @@ const UpdateCourse = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container py-sm-custom-5">
       {userData ? (
         <>
           {!isLoading ? (
@@ -445,13 +491,9 @@ const UpdateCourse = () => {
                         </div>
                       </div>
                     </Form>
-
-                    <AlertDismissible
-                      data={{
-                        showPopup,
-                        setShowPopUp,
-                        popupData,
-                      }}
+                    <AddNewLecture
+                      lectures={courseData.lectures}
+                      courseId={courseData._id}
                     />
                   </div>
                 </>

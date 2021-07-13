@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
 
-const PopUpModal = ({ show, onHide, setOk, data }) => {
+const PopUpModal = ({ show, onHide, setOk, data, callback }) => {
   return (
     <Modal
       show={show}
@@ -19,7 +19,7 @@ const PopUpModal = ({ show, onHide, setOk, data }) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>{data.body}</p>
+        <div>{data.body}</div>
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -35,6 +35,7 @@ const PopUpModal = ({ show, onHide, setOk, data }) => {
           onClick={() => {
             setOk(true);
             onHide(false);
+            callback();
           }}
         >
           Ok

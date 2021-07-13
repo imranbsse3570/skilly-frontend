@@ -13,7 +13,12 @@ li {
   width: auto;
 }
 
-.custom-form {
+.custom-dropdown {
+  position: relative !important;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  transform: none !important;
+  padding: 0 !important;
 }
 
 a {
@@ -536,6 +541,32 @@ h6 {
   width: fit-content;
 }
 
+.videoAdmin-item {
+  transition: 0.5s all linear;
+  width: 100%;
+  animation: hideOut 2.5s forwards;
+}
+
+.videoAdmin-item.show {
+  animation: showIn 1s forwards;
+}
+
+.loading-spinner-overlay {
+  position: fixed;
+  width: 100%;
+  background: rgb(0, 0, 0, 0.5);
+  top: 0;
+  height: 100%;
+  z-index: 99;
+}
+
+.animation-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* Syntax highlighting */
 .token.comment,
 .token.prolog,
@@ -670,6 +701,28 @@ h6 {
   }
 }
 
+@keyframes hideOut {
+  0% {
+    height: auto;
+    transform: translateX(0);
+  }
+  100% {
+    height: 0;
+    transform: translateX(-150%);
+  }
+}
+
+@keyframes showIn {
+  0% {
+    height: 0;
+    transform: translateX(-150%);
+  }
+  100% {
+    height: auto;
+    transform: translateX(0);
+  }
+}
+
 /* util classes */
 
 .mobile-only {
@@ -687,5 +740,10 @@ h6 {
 
   .cst {
     display: block !important;
+  }
+
+  .py-sm-custom-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 }

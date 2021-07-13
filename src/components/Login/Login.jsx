@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Form, Button } from "react-bootstrap";
 import { NavLink as Link, useNavigate } from "react-router-dom";
 
 import { login } from "../../services/account";
 import { validateEmail, validatePassword } from "../../util/validate";
-import AlertDismissible from "../higher-order-component/AlertDismissible";
-import { GlobalContext } from "../../App";
+import { GlobalContext, AlertDismissibleContext } from "../../App";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -15,8 +13,10 @@ const LogIn = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [requestedToLogin, setRequestedToLogin] = useState(false);
   const [loginTxt, setLoginTxt] = useState("Login");
-  const [showPopup, setShowPopUp] = useState(false);
-  const [popupData, setPopUpData] = useState({});
+
+  const { setShowPopUp, setPopUpData, setStyle } = useContext(
+    AlertDismissibleContext
+  );
 
   const { setIsLoading } = useContext(GlobalContext);
 
@@ -156,13 +156,6 @@ const LogIn = () => {
           </Form>
         </div>
       </div>
-      <AlertDismissible
-        data={{
-          showPopup,
-          setShowPopUp,
-          popupData,
-        }}
-      />
     </div>
   );
 };
