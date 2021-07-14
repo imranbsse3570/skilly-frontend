@@ -133,7 +133,9 @@ function App() {
                 setStyle,
               }}
             >
-              <LoadingSpinnerContext.Provider value={{ setRunSpinner }}>
+              <LoadingSpinnerContext.Provider
+                value={{ setRunSpinner, runSpinner }}
+              >
                 <RouterConfig data={GlobalConfigData} />
                 <div
                   className={`loading-spinner-overlay ${

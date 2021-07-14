@@ -1,6 +1,4 @@
 import React, { useState, useContext } from "react";
-import { Form } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 
 import VideoModal from "../higher-order-component/VideoModal";
 import {
@@ -8,9 +6,14 @@ import {
   GlobalContext,
   LoadingSpinnerContext,
 } from "../../App";
-import { updateLecture, deleteLecture } from "../../services/lecture";
+import {
+  updateLecture,
+  deleteLecture,
+  addNewLecture,
+} from "../../services/lecture";
 
 import LectureAdmin from "../higher-order-component/LectureAdmin";
+import CreateNewLecture from "../higher-order-component/CreateNewLecture";
 
 const AddNewLecture = ({ lectures, courseId }) => {
   const { setRunSpinner } = useContext(LoadingSpinnerContext);
@@ -20,6 +23,29 @@ const AddNewLecture = ({ lectures, courseId }) => {
   // video modal
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [videoUrl, setVideoUrl] = useState("");
+  const [modalTitle, setModalTitle] = useState("");
+
+  const handleAddLecture = async (formData, courseId) => {
+    setRunSpinner(true);
+    try {
+      await addNewLecture(formData, courseId);
+      await updateUserData();
+
+      setPopUpData({
+        popupType: "success",
+        heading: "Success",
+        body: <p>Successfully Added New lecture</p>,
+      });
+    } catch (err) {
+      setPopUpData({
+        popupType: "danger",
+        heading: "Error",
+        body: err.message,
+      });
+    }
+    setRunSpinner(false);
+    setShowPopUp(true);
+  };
 
   const handleDeleteLecture = async (course, lecture) => {
     setRunSpinner(true);
@@ -87,16 +113,28 @@ const AddNewLecture = ({ lectures, courseId }) => {
                 courseId={courseId}
                 setShowVideoModal={setShowVideoModal}
                 setVideoUrl={setVideoUrl}
+                setModalTitle={setModalTitle}
               />
             ))}
+            <CreateNewLecture
+              courseId={courseId}
+              handleAddLecture={handleAddLecture}
+            />
             <VideoModal
               showVideoModal={showVideoModal}
               setShowVideoModal={setShowVideoModal}
               videoUrl={videoUrl}
+              title={modalTitle}
             />
           </>
         ) : (
-          <p className="text-center">No Lectures to Show</p>
+          <>
+            <CreateNewLecture
+              courseId={courseId}
+              handleAddLecture={handleAddLecture}
+            />
+            <p className="pt-2 text-center">No Lectures to Show</p>
+          </>
         )}
       </div>
     </div>

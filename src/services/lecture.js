@@ -25,23 +25,26 @@ export const updateLecture = async (formdata, courseId, lectureId) => {
   const myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${localStorage.getItem("token")}`);
 
-  const response = await fetch(
-    `https://skilly-online.herokuapp.com/api/v1/courses/${courseId}/lectures/${lectureId}`,
-    {
-      method: "PATCH",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
+  try {
+    const response = await fetch(
+      `http://localhost:8000/api/v1/courses/${courseId}/lectures/${lectureId}`,
+      {
+        method: "PATCH",
+        headers: myHeaders,
+        body: formdata,
+        redirect: "follow",
+      }
+    );
+    const result = await response.json();
+
+    if (result.status.toLowerCase() !== "success") {
+      throw new Error(result.message);
     }
-  );
 
-  const result = await response.json();
-
-  if (result.status.toLowerCase() !== "success") {
-    throw new Error(result.message);
+    return result;
+  } catch (err) {
+    console.log(err);
   }
-
-  return result;
 };
 
 export const deleteLecture = async (courseId, lectureId) => {

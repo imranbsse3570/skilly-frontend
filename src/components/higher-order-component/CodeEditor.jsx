@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Editor from "react-simple-code-editor";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 
+import { executeCode } from "../../services/compiler";
+import { AlertDismissibleContext } from "../../App";
+
 const CodeEditor = () => {
+  const { showPopup, setShowPopUp, popupData, setPopUpData, style, setStyle } =
+    useContext(AlertDismissibleContext);
+
   const [code, setCode] = useState(`function add(a, b) {\n  return a + b;\n}`);
 
   const [compilingResult, setCompilingResult] = useState(false);
@@ -16,7 +22,34 @@ const CodeEditor = () => {
     slug: "java",
   });
 
-  useEffect(() => {}, [compilingResult]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await executeCode(selectedLanguage.slug, code);
+        const { output } = data.data;
+
+        setOutput(output);
+      } catch (err) {
+        setPopUpData({
+          popupType: "danger",
+          heading: "Error",
+          body: (
+            <p>
+              Error in execution code
+              <br />
+              {err.message}
+            </p>
+          ),
+        });
+        setShowPopUp(true);
+      }
+      setCompilingResult(false);
+    };
+
+    if (compilingResult) {
+      fetchData();
+    }
+  }, [compilingResult]);
 
   const language = [
     {
@@ -51,10 +84,6 @@ const CodeEditor = () => {
       name: "C#",
       slug: "csharp",
     },
-    {
-      name: "JavaScript",
-      slug: "nodejs",
-    },
   ];
 
   return (
@@ -77,7 +106,7 @@ const CodeEditor = () => {
             })}
           </DropdownButton>
           <button
-            onClick={() => setCompilingResult(!compilingResult)}
+            onClick={() => setCompilingResult(true)}
             className="btn btn-primary d-inline ml-2"
           >
             Run

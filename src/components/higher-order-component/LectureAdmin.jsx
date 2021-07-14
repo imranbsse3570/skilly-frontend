@@ -11,6 +11,7 @@ const LectureAdmin = ({
   handleDelete,
   setVideoUrl,
   setShowVideoModal,
+  setModalTitle,
 }) => {
   // toggle states
   const [showDescription, setShowDescription] = useState(false);
@@ -64,9 +65,10 @@ const LectureAdmin = ({
   const handleIsLockedPatch = async () => {
     try {
       const formData = new FormData();
-      formData.append("isLocked", isLocked);
+      formData.append("isLocked", !isLocked);
 
       await handleUpdate(courseId, lecture._id, formData);
+      setIsLocked(!isLocked);
     } catch (err) {
       console.log(err);
     }
@@ -82,7 +84,8 @@ const LectureAdmin = ({
           <i
             onClick={async () => {
               setShowVideoModal(true);
-              (await viewLecture(courseId, lecture.source))
+              setModalTitle(lecture.title);
+              await viewLecture(courseId, lecture.source)
                 .then(function (myBlob) {
                   var objectURL = URL.createObjectURL(myBlob);
                   setVideoUrl(objectURL);
@@ -102,10 +105,7 @@ const LectureAdmin = ({
         </div>
         <div className="col-1">
           <i
-            onClick={() => {
-              setIsLocked(!isLocked);
-              handleIsLockedPatch();
-            }}
+            onClick={handleIsLockedPatch}
             className={`fas ${isLocked ? "fa-lock" : "fa-lock-open"}`}
           ></i>
         </div>
@@ -141,15 +141,18 @@ const LectureAdmin = ({
         </div>
       </div>
       <div
-        className={`py-2 border-top videoAdmin-item ${
-          showDescription ? "show" : "hide"
+        className={`pt-2 border-top videoAdmin-item ${
+          showDescription ? "show pb-2" : "hide"
         }`}
       >
         {lecture.description}
       </div>
       <div className={`videoAdmin-item ${showEdit ? "show" : "hide"}`}>
         <Form onSubmit={(e) => handleSubmitForm(e)}>
-          <Form.Group className="text-left mb-2" controlId="lectureTitle">
+          <Form.Group
+            className="text-left mb-2"
+            controlId={`lectureTitle--${lecture._id}`}
+          >
             <Form.Label>Lecture Title:</Form.Label>
             <Form.Control
               type="text"
@@ -160,12 +163,20 @@ const LectureAdmin = ({
           </Form.Group>
 
           <Row className="mb-2">
-            <Form.Group as={Col} controlId="formFile" className="mb-3">
+            <Form.Group
+              as={Col}
+              controlId={`formFile--${lecture._id}`}
+              className="mb-3"
+            >
               <Form.Label>Lecture Video</Form.Label>
               <Form.Control type="file" onChange={handleMediaChange} />
             </Form.Group>
 
-            <Form.Group as={Col} className="text-left" controlId="published">
+            <Form.Group
+              as={Col}
+              className="text-left"
+              controlId={`published--${lecture._id}`}
+            >
               <Form.Label>Is Locked:</Form.Label>
               <Form.Control
                 className="me-sm-2"
@@ -181,7 +192,10 @@ const LectureAdmin = ({
             </Form.Group>
           </Row>
 
-          <Form.Group className="text-left" controlId="description">
+          <Form.Group
+            className="text-left"
+            controlId={`description--${lecture._id}`}
+          >
             <Form.Label>Description:</Form.Label>
             <Form.Control
               as="textarea"
