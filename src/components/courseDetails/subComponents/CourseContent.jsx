@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink as Link } from "react-router-dom";
 
 const CourseContent = ({
+  additionalClass,
   title,
   summary,
   author,
@@ -10,7 +11,7 @@ const CourseContent = ({
   rating,
 }) => {
   return (
-    <div className="course-content box-shadow">
+    <div className={`course-content box-shadow ${additionalClass}`}>
       <h3>{title}</h3>
       <p>{summary}</p>
       <div className="details">
@@ -27,7 +28,7 @@ const CourseContent = ({
           <i className={`${rating >= 3 ? "fas" : "far"} fa-star`}></i>
           <i className={`${rating >= 4 ? "fas" : "far"} fa-star`}></i>
           <i className={`${rating >= 5 ? "fas" : "far"} fa-star`}></i>
-          <span style={{ paddingLeft: 10 }}>{noOfReviews} views</span>
+          <span style={{ paddingLeft: 10 }}>{noOfReviews} reviews</span>
         </div>
       </div>
     </div>

@@ -15,7 +15,12 @@ import Checkout from "../components/checkout/Checkout";
 import PageNotFound from "../components/notFound/PageNotFound";
 import MyProfileData from "../components/account/MyProfileData";
 import MyCourses from "../components/account/MyCourses";
-import CreateNewCourse from "../components/createNewCourse/CreateNewCourse";
+import CreateNewCourse from "../components/coursesEdit/CreateNewCourse";
+import UpdateCourse from "../components/coursesEdit/updateCourse";
+import AdminNav from "../components/higher-order-component/AdminNav";
+import PurchasedCourses from "../components/account/PurchasedCourses";
+import AddNewLecture from "../components/lectures/AddLectures";
+import EditLecture from "../components/lectures/EditLectures";
 
 const RouterConfig = ({ data }) => {
   return (
@@ -35,10 +40,17 @@ const RouterConfig = ({ data }) => {
           </Route>
         </Route>
 
-        <Route path="/users">
+        <Route path="/users" element={<AdminNav />}>
+          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
           <Route path="/myProfile" element={<MyProfileData />} />
           <Route path="/myCourses" element={<MyCourses />} />
+          <Route path="/purchasedCourses" element={<PurchasedCourses />} />
           <Route path="/createNewCourse" element={<CreateNewCourse />} />
+          <Route path="/updateCourse/:courseSlug">
+            <Route path="/" element={<UpdateCourse />} />
+            <Route path="/lectures" element={<AddNewLecture />} />
+          </Route>
+          <Route path="/editLectures" element={<EditLecture />} />
         </Route>
 
         <Route path="/:courseId">

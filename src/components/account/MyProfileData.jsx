@@ -1,15 +1,17 @@
 import React, { useContext, useRef, useState } from "react";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import { Form, Row, Col, Button } from "react-bootstrap";
 
-import { GlobalContext } from "../../App";
+import { GlobalContext, AlertDismissibleContext } from "../../App";
 import { updateProfile as updateProfileSave } from "../../services/account";
-import AlertDismissible from "../../util/AlertDismissible";
 
 const MyProfileData = () => {
   const { userData, updateProfile } = useContext(GlobalContext);
+
+  // Alert Dismissible Context
+  const { setShowPopUp, setPopUpData, setStyle } = useContext(
+    AlertDismissibleContext
+  );
+
   const [src, setSrc] = useState(
     `https://skilly-online.herokuapp.com/files/users/${userData.photo}`
   );
@@ -22,9 +24,6 @@ const MyProfileData = () => {
   const [twitterLink, setTwitterLink] = useState(userData.twitterLink);
   const [linkedInLink, setLinkedInLink] = useState(userData.linkedInLink);
   const [youtubeLink, setYoutubeLink] = useState(userData.youtubeLink);
-
-  const [showPopup, setShowPopUp] = useState(false);
-  const [popupData, setPopUpData] = useState({});
 
   const inputRef = useRef();
 
@@ -108,7 +107,7 @@ const MyProfileData = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container py-sm-custom-5">
       {userData ? (
         <>
           <div className="row">
@@ -337,13 +336,6 @@ const MyProfileData = () => {
               </div>
             </div>
           </Form>
-          <AlertDismissible
-            data={{
-              showPopup,
-              setShowPopUp,
-              popupData,
-            }}
-          />
         </>
       ) : (
         <p className="text-center">Please Login to view this page</p>

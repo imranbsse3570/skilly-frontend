@@ -13,7 +13,12 @@ li {
   width: auto;
 }
 
-.custom-form {
+.custom-dropdown {
+  position: relative !important;
+  inset: 0px auto auto 0px;
+  margin: 0px;
+  transform: none !important;
+  padding: 0 !important;
 }
 
 a {
@@ -408,6 +413,29 @@ h6 {
   color: #007bff !important;
 }
 
+.list-input-cross-button {
+  position: absolute;
+  float: right;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background: rgb(189, 1, 1);
+  line-height: 0.5;
+  transform: translate(50%, -50%) rotate(45deg);
+  color: #fff;
+}
+
+.list-input-add-button {
+  position: absolute;
+  top: 50%;
+  line-height: 0.5;
+  right: 15px;
+  transform: translateY(-50%);
+  padding: 5px;
+  color: #fff;
+  background: #007bff;
+}
+
 .form-input-invalid {
   color: #495057;
   background-color: #fff;
@@ -452,6 +480,34 @@ h6 {
   color: #fff;
 }
 
+.rdw-editor-main {
+  padding: 0 20px;
+  height: 280px;
+}
+
+.rdw-editor-toolbar {
+  border: none;
+  padding: 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.rdw-option-wrapper {
+  height: 30px;
+  padding: 5px;
+}
+
+.rdw-image-modal,
+.rdw-emoji-modal,
+.rdw-embedded-modal {
+  right: 5px;
+  left: auto;
+  height: auto;
+}
+
+.rdw-emoji-modal {
+  max-height: 200px;
+}
+
 .rotating-element-360 {
   animation: 0.4s linear rotating360 infinite;
 }
@@ -472,7 +528,7 @@ h6 {
   background-color: rgb(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
-  z-index: 9;
+  z-index: 99;
 }
 
 .alert-dismissible {
@@ -483,6 +539,32 @@ h6 {
 .alert-dismissible .close {
   box-shadow: none;
   width: fit-content;
+}
+
+.videoAdmin-item {
+  transition: 0.5s all linear;
+  width: 100%;
+  animation: hideOut 2.5s forwards;
+}
+
+.videoAdmin-item.show {
+  animation: showIn 1s forwards;
+}
+
+.loading-spinner-overlay {
+  position: fixed;
+  width: 100%;
+  background: rgb(0, 0, 0, 0.5);
+  top: 0;
+  height: 100%;
+  z-index: 99;
+}
+
+.animation-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Syntax highlighting */
@@ -619,6 +701,28 @@ h6 {
   }
 }
 
+@keyframes hideOut {
+  0% {
+    height: auto;
+    transform: translateX(0);
+  }
+  100% {
+    height: 0;
+    transform: translateX(-150%);
+  }
+}
+
+@keyframes showIn {
+  0% {
+    height: 0;
+    transform: translateX(-150%);
+  }
+  100% {
+    height: auto;
+    transform: translateX(0);
+  }
+}
+
 /* util classes */
 
 .mobile-only {
@@ -632,5 +736,14 @@ h6 {
 
   .mobile-only {
     display: block;
+  }
+
+  .cst {
+    display: block !important;
+  }
+
+  .py-sm-custom-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
   }
 }

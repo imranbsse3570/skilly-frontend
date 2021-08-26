@@ -1,7 +1,8 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 const AlertDismissible = ({ data }) => {
-  const { showPopup, setShowPopUp, popupData, style } = data;
+  const { showPopup, setShowPopUp, popupData, setPopUpData, style, setStyle } =
+    data;
 
   if (showPopup) {
     return (
@@ -10,6 +11,8 @@ const AlertDismissible = ({ data }) => {
         onClick={(e) => {
           if (e.target.className.includes("alert-overlay")) {
             setShowPopUp(false);
+            setPopUpData({});
+            setStyle({});
           }
         }}
       >
@@ -17,7 +20,11 @@ const AlertDismissible = ({ data }) => {
           className="custom-alert"
           style={style}
           variant={popupData.popupType}
-          onClose={() => setShowPopUp(false)}
+          onClose={() => {
+            setShowPopUp(false);
+            setPopUpData({});
+            setStyle({});
+          }}
           dismissible
         >
           <Alert.Heading>
@@ -27,8 +34,9 @@ const AlertDismissible = ({ data }) => {
         </Alert>
       </div>
     );
+  } else {
+    return <span></span>;
   }
-  return <span></span>;
 };
 
 export default AlertDismissible;
