@@ -1,40 +1,125 @@
-import React from "react";
-import MediaPlayer from "../higher-order-component/MediaPlayer";
-import CurriculumSub from "../higher-order-component/CurriculumSub";
-import VideoDetails from "./VideoDetails/VideoDetails";
+import React, { useEffect, useState, useContext } from "react";
+import { Button } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { saveAs } from "file-saver";
 
-const videosUrl = [
-  "http://media.w3.org/2010/05/bunny/movie.mp4",
-  "https://cdn.videvo.net/videvo_files/video/free/2012-08/small_watermarked/hd0029_preview.webm",
-];
+import MediaPlayer from "../higher-order-component/MediaPlayer";
+import Curriculum from "./VideoDetails/Curriculum";
+import VideoDetails from "./VideoDetails/VideoDetails";
+import { GlobalContext, LoadingSpinnerContext } from "../../App";
+import { getCourseData } from "../../services/course";
+import { viewLecture } from "../../services/lecture";
 
 const LecturePortal = () => {
-  const [videoPlaying, setVideoPlaying] = React.useState(videosUrl[0]);
+  const { courseId } = useParams();
+  const { userData } = useContext(GlobalContext);
+  const { setRunSpinner } = useContext(LoadingSpinnerContext);
 
-  const changeVideo = (id) => {
-    setVideoPlaying(videosUrl[id]);
-  };
+  const [courseData, setCourseData] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isPurchased, setIsPurchased] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
+  const [blobDownload, setBlobDownload] = useState(undefined);
+
+  useEffect(() => {
+    const fetchingData = async () => {
+      setRunSpinner(true);
+      const result = await getCourseData(courseId);
+      if (result.status.toLowerCase() === "success") {
+        if (result.results > 0) {
+          const course = result.data.docs[0];
+          const purchase = userData.courses
+            .map((course) => course.courseId)
+            .includes(course._id.toString());
+          setCourseData(course);
+          setIsPurchased(purchase);
+
+          if (purchase) {
+            if (course.lectures.length > 0) {
+              const lecture = course.lectures[0];
+              await viewLecture(course._id, lecture.source)
+                .then(function (myBlob) {
+                  setBlobDownload({ blob: myBlob, title: lecture.title });
+                  var objectURL = URL.createObjectURL(myBlob);
+                  setVideoUrl(objectURL);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            } else {
+              setVideoUrl("http://media.w3.org/2010/05/bunny/movie.mp4");
+            }
+          }
+        }
+      }
+      setRunSpinner(false);
+      setIsLoading(false);
+    };
+
+    if (isLoading) {
+      fetchingData();
+    }
+  }, [isLoading]);
 
   return (
     <div className="lecture_portal_page container py-5">
-      <div className="row">
-        <div className="col-md-8">
-          <MediaPlayer className="box-shadow" videoUrl={videoPlaying} />
-          <VideoDetails />
-        </div>
-        <div className="col-md-4">
-          <div className="courseCricullum box-shadow">
-            <CurriculumSub openState="0" changeVideo={changeVideo} />
-            <CurriculumSub />
-            <CurriculumSub />
-            <CurriculumSub />
-            <CurriculumSub />
+      {userData ? (
+        !isLoading ? (
+          <div>
+            {courseData ? (
+              isPurchased ? (
+                <div className="row">
+                  <div className="col-md-8">
+                    <Button
+                      style={{
+                        position: "absolute",
+                        zIndex: 9,
+                        right: "20px",
+                        top: "5px",
+                      }}
+                      onClick={() => {
+                        if (blobDownload) {
+                          saveAs(
+                            blobDownload.blob,
+                            `${blobDownload.title}.mp4`
+                          );
+                        }
+                      }}
+                    >
+                      <i className="fas fa-download"></i>
+                    </Button>
+                    <MediaPlayer className="box-shadow" videoUrl={videoUrl} />
+                    <VideoDetails courseData={courseData} />
+                  </div>
+                  <div className="col-md-4">
+                    <div className="courseCricullum box-shadow">
+                      {courseData.lectures.map((lecture) => (
+                        <Curriculum
+                          openState="1"
+                          setVideoUrl={setVideoUrl}
+                          lecture={lecture}
+                          courseId={courseData._id}
+                          setBlobDownload={setBlobDownload}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <p>Please Purchase this course inorder to view lectures</p>
+              )
+            ) : (
+              <p>Course Not Found</p>
+            )}
           </div>
-        </div>
-      </div>
+        ) : (
+          <></>
+        )
+      ) : (
+        <p>Please Login to view this resource</p>
+      )}
     </div>
   );
 };
 
-// https://media.w3.org/2010/05/sintel/trailer_hd.mp4
 export default LecturePortal;

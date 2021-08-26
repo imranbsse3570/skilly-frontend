@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
-import AlertDismissible from "../../util/AlertDismissible";
+import React, { useContext } from "react";
+import { Accordion, Card } from "react-bootstrap";
+
+import { AlertDismissibleContext } from "../../App";
 import MediaPlayer from "../higher-order-component/MediaPlayer";
 
 const CurriculumSub = ({ openState, changeVideo, lecture, courseId }) => {
-  const [showPopup, setShowPopup] = useState(false);
-  const [videoUrl, setVideoUrl] = useState("");
+  // Alert Dismissible Context
+  const { setShowPopUp, setPopUpData, setStyle } = useContext(
+    AlertDismissibleContext
+  );
 
   return (
     <div>
@@ -27,10 +29,22 @@ const CurriculumSub = ({ openState, changeVideo, lecture, courseId }) => {
               <li
                 onClick={() => {
                   if (!lecture.isLocked) {
-                    setShowPopup(true);
-                    setVideoUrl(
-                      `https://skilly-online.herokuapp.com/files/${courseId}/lectures/${lecture.source}`
-                    );
+                    setShowPopUp(true);
+                    setStyle({
+                      maxWidth: "80%",
+                      width: "80%",
+                      border: "1px solid",
+                    });
+
+                    setPopUpData({
+                      heading: lecture.title,
+                      body: (
+                        <MediaPlayer
+                          videoUrl={`https://skilly-online.herokuapp.com/files/${courseId}/lectures/${lecture.source}`}
+                        />
+                      ),
+                      popupType: "dark",
+                    });
                   }
                 }}
                 className="list-group-item py-2 bg-light"
@@ -44,22 +58,6 @@ const CurriculumSub = ({ openState, changeVideo, lecture, courseId }) => {
           </div>
         </Accordion.Collapse>
       </Accordion>
-      <AlertDismissible
-        data={{
-          style: {
-            maxWidth: "80%",
-            width: "80%",
-            border: "1px solid",
-          },
-          showPopup,
-          setShowPopUp: setShowPopup,
-          popupData: {
-            heading: lecture.title,
-            body: <MediaPlayer videoUrl={videoUrl} />,
-            popupType: "dark",
-          },
-        }}
-      />
     </div>
   );
 };

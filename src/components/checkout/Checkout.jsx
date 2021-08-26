@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Parser } from "html-to-react";
 import { useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { NavLink as Link } from "react-router-dom";
@@ -6,12 +7,14 @@ import currencyFormatter from "currency-formatter";
 
 import { handleCheckout } from "../../services/checkout";
 import { getCourseData } from "../../services/course";
+import { AlertDismissibleContext, GlobalContext } from "../../App";
 import "./checkout.css";
-import AlertDismissible from "../../util/AlertDismissible";
 
 const stripePromise = loadStripe(
   "pk_test_51IzZgmLLnvDoXWyo3ylp4Cn7f23mPqkniEc7mLnfjJ5THdSvA7QUUKleJQFngbrJUV8hC5003zow7Hlptmy4D59R00C0amFEzd"
 );
+
+const htmlParser = new Parser();
 
 const ProductDisplay = ({ handleClick, course }) => (
   <section style={{ maxWidth: 600 }} className="mx-auto border rounded">
@@ -35,7 +38,9 @@ const ProductDisplay = ({ handleClick, course }) => (
           <i className={`${course.rating >= 5 ? "fas" : "far"} fa-star`}></i>
         </div>
         <br />
-        <p>{course.description}</p>
+        <div style={{ width: "100%", overflow: "hidden" }}>
+          {htmlParser.parse(course.description)}
+        </div>
       </div>
       <button
         type="button"
@@ -86,8 +91,10 @@ export default function Checkout() {
   const { courseId } = useParams();
   const [courseData, setCourseData] = useState({});
   const [loading, setLoading] = useState(true);
-  const [showPopup, setShowPopUp] = useState(false);
-  const [popupData, setPopUpData] = useState({});
+
+  const { userData } = useContext(GlobalContext);
+  // Alert Dismissible Context
+  const { setShowPopUp, setPopUpData } = useContext(AlertDismissibleContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -116,10 +123,8 @@ export default function Checkout() {
   const handleClick = async (id) => {
     const stripe = await stripePromise;
 
-    if (localStorage.getItem("token")) {
+    if (userData) {
       const response = await handleCheckout(id);
-
-      console.log(response);
 
       if (response.status !== "fail") {
         const session = response.session;
@@ -195,13 +200,6 @@ export default function Checkout() {
           ) : (
             <ProductDisplay course={courseData} handleClick={handleClick} />
           )}
-          <AlertDismissible
-            data={{
-              showPopup,
-              setShowPopUp,
-              popupData,
-            }}
-          />
         </div>
       )}
     </div>

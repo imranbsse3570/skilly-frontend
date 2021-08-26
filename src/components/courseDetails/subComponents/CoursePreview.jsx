@@ -1,9 +1,14 @@
-import React, { useState } from "react";
-import AlertDismissible from "../../../util/AlertDismissible";
+import React, { useState, useContext } from "react";
+
+import { AlertDismissibleContext } from "../../../App";
 import MediaPlayer from "../../higher-order-component/MediaPlayer";
 
 const CoursePreview = ({ src, title, lectures, courseId }) => {
-  const [showPopup, setShowPopup] = useState(false);
+  // Alert Dismissible Context
+  const { setShowPopUp, setPopUpData, setStyle } = useContext(
+    AlertDismissibleContext
+  );
+
   const videoUrl =
     lectures.length > 0
       ? `https://skilly-online.herokuapp.com/files/${courseId}/lectures/${lectures[0]}`
@@ -18,27 +23,21 @@ const CoursePreview = ({ src, title, lectures, courseId }) => {
       <span
         className="preview-btn"
         onClick={() => {
-          setShowPopup(true);
+          setShowPopUp(true);
+          setPopUpData({
+            heading: title,
+            body: <MediaPlayer videoUrl={videoUrl} />,
+            popupType: "dark",
+          });
+          setStyle({
+            maxWidth: "80%",
+            width: "80%",
+            border: "1px solid",
+          });
         }}
       >
         <i className="fas fa-play"></i>
       </span>
-      <AlertDismissible
-        data={{
-          style: {
-            maxWidth: "80%",
-            width: "80%",
-            border: "1px solid",
-          },
-          showPopup,
-          setShowPopUp: setShowPopup,
-          popupData: {
-            heading: title,
-            body: <MediaPlayer videoUrl={videoUrl} />,
-            popupType: "dark",
-          },
-        }}
-      />
     </div>
   );
 };
