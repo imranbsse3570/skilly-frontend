@@ -1,24 +1,60 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "skilly",
+  "name": "Skilly Online learning management system",
+
   "icons": [
     {
       "src": "skilly-logo.png",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+
+    {
+      "src": "slide1.jpg",
+      "sizes": "48x48 72x72 96x96 128x128 144x144 256x256 512x512",
+      "type": "image/jpg",
+
+      "purpose": "maskable any"
+    },
+    {
+      "src": "slide2.jpg",
+      "sizes": "48x48 72x72 96x96 128x128 144x144 256x256 512x512",
+      "type": "image/jpg",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "slide3.jpg",
+      "sizes": "48x48 72x72 96x96 128x128 144x144 256x256 512x512",
+      "type": "image/jpg",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "slide4.jpg",
+      "sizes": "48x48 72x72 96x96 128x128 144x144 256x256 512x512",
+      "type": "image/jpg",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "testimonial.jpg",
+      "sizes": "48x48 72x72 96x96 128x128 144x144 256x256 512x512",
+      "type": "image/jpg",
+      "purpose": "maskable any"
     },
     {
       "src": "skilly-logo.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "skilly-logo.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "purpose": "maskable any"
     }
   ],
-  "start_url": ".",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=cheeaun.hackerweb"
+    }
+  ],
+  "start_url": "/build",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
