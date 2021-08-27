@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useReducer } from "react";
 import { Spinner } from "react-bootstrap";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import GlobalConfigData from "./config/globalConfig.json";
 import RouterConfig from "./routes/Routes";
@@ -35,7 +36,7 @@ function App() {
   const [modalShow, setModalShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [profileData, setProfileData] = useState(undefined);
-  const [callback, setCallback] = useState(() => () => {});
+  const [callback, setCallback] = useState(() => () => { });
 
   // Alert Dismissable
   const [showPopup, setShowPopUp] = useState(false);
@@ -112,43 +113,20 @@ function App() {
             updateUserData,
           }}
         >
-          <ModalPopUpContext.Provider
-            value={{
-              ok,
-              setOk,
-              modalData,
-              setModalData,
-              modalShow,
-              setModalShow,
-              setCallback,
-            }}
-          >
-            <AlertDismissibleContext.Provider
+          <Router>
+            <ModalPopUpContext.Provider
               value={{
-                showPopup,
-                setShowPopUp,
-                popupData,
-                setPopUpData,
-                style,
-                setStyle,
+                ok,
+                setOk,
+                modalData,
+                setModalData,
+                modalShow,
+                setModalShow,
+                setCallback,
               }}
             >
-              <LoadingSpinnerContext.Provider
-                value={{ setRunSpinner, runSpinner }}
-              >
-                <RouterConfig data={GlobalConfigData} />
-                <div
-                  className={`loading-spinner-overlay ${
-                    runSpinner ? "" : "d-none"
-                  }`}
-                >
-                  <div className="animation-spinner">
-                    <Spinner animation="border" role="status" variant="light" />
-                  </div>
-                </div>
-              </LoadingSpinnerContext.Provider>
-              <AlertDismissible
-                data={{
+              <AlertDismissibleContext.Provider
+                value={{
                   showPopup,
                   setShowPopUp,
                   popupData,
@@ -156,16 +134,40 @@ function App() {
                   style,
                   setStyle,
                 }}
+              >
+                <LoadingSpinnerContext.Provider
+                  value={{ setRunSpinner, runSpinner }}
+                >
+                  <RouterConfig data={GlobalConfigData} />
+                  <div
+                    className={`loading-spinner-overlay ${runSpinner ? "" : "d-none"
+                      }`}
+                  >
+                    <div className="animation-spinner">
+                      <Spinner animation="border" role="status" variant="light" />
+                    </div>
+                  </div>
+                </LoadingSpinnerContext.Provider>
+                <AlertDismissible
+                  data={{
+                    showPopup,
+                    setShowPopUp,
+                    popupData,
+                    setPopUpData,
+                    style,
+                    setStyle,
+                  }}
+                />
+              </AlertDismissibleContext.Provider>
+              <PopUpModal
+                show={modalShow}
+                onHide={setModalShow}
+                setOk={setOk}
+                data={modalData}
+                callback={callback}
               />
-            </AlertDismissibleContext.Provider>
-            <PopUpModal
-              show={modalShow}
-              onHide={setModalShow}
-              setOk={setOk}
-              data={modalData}
-              callback={callback}
-            />
-          </ModalPopUpContext.Provider>
+            </ModalPopUpContext.Provider>
+          </Router>
         </GlobalContext.Provider>
       ) : (
         <p className="py-5 text-center">Loading...</p>

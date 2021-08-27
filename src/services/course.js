@@ -81,3 +81,22 @@ export const deleteCourse = async (courseId) => {
     throw new Error(result.message);
   }
 };
+
+export const generateCertificate = async (courseId) => {
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${localStorage.getItem("token")}`);
+
+  const response = await fetch(
+    `https://skilly-online.herokuapp.com/api/v1/courses/${courseId}/generateCertificate`,
+    {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    }
+  );
+
+
+  const result = await response.blob();
+
+  return result;
+}

@@ -24,9 +24,8 @@ import EditLecture from "../components/lectures/EditLectures";
 
 const RouterConfig = ({ data }) => {
   return (
-    <Router>
+    <>
       <Header />
-
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/courses">
@@ -67,7 +66,7 @@ const RouterConfig = ({ data }) => {
       </Routes>
 
       <Footer data={data.footer} />
-    </Router>
+    </>
   );
 };
 
