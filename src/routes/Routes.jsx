@@ -28,39 +28,39 @@ const RouterConfig = ({ data }) => {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/courses">
-          <Route path="/" element={<CategoriesPage />} />
-          <Route path="/:categoryId">
-            <Route path="/" element={<Courses />} />
-            <Route path="/:courseId">
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/" element={<CourseDetails />} />
+        <Route path="courses">
+          <Route index={true} element={<CategoriesPage />} />
+          <Route path=":categoryId">
+            <Route index={true} element={<Courses />} />
+            <Route path=":courseId">
+              <Route path="checkout" element={<Checkout />} />
+              <Route index={true} element={<CourseDetails />} />
             </Route>
           </Route>
         </Route>
 
-        <Route path="/users" element={<AdminNav />}>
+        <Route path="users" element={<AdminNav />}>
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-          <Route path="/myProfile" element={<MyProfileData />} />
-          <Route path="/myCourses" element={<MyCourses />} />
-          <Route path="/purchasedCourses" element={<PurchasedCourses />} />
-          <Route path="/createNewCourse" element={<CreateNewCourse />} />
-          <Route path="/updateCourse/:courseSlug">
-            <Route path="/" element={<UpdateCourse />} />
-            <Route path="/lectures" element={<AddNewLecture />} />
+          <Route path="myProfile" element={<MyProfileData />} />
+          <Route path="myCourses" element={<MyCourses />} />
+          <Route path="purchasedCourses" element={<PurchasedCourses />} />
+          <Route path="createNewCourse" element={<CreateNewCourse />} />
+          <Route path="updateCourse/:courseSlug">
+            <Route index={true} element={<UpdateCourse />} />
+            <Route path="lectures" element={<AddNewLecture />} />
           </Route>
-          <Route path="/editLectures" element={<EditLecture />} />
+          <Route path="editLectures" element={<EditLecture />} />
         </Route>
 
-        <Route path="/:courseId">
-          <Route path="/lectures">
-            <Route path="/:lectureId" element={<LecturePortal />} />
+        <Route path=":courseId">
+          <Route path="lectures">
+            <Route path=":lectureId" element={<LecturePortal />} />
           </Route>
         </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<SignUp />} />
-        <Route path="/pages">
-          <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<SignUp />} />
+        <Route path="pages">
+          <Route path="contact-us" element={<ContactUs />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
